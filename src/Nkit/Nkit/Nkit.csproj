@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Drawing\ImageH.cs" />
+    <Compile Include="IO\LogH.cs" />
     <Compile Include="Net\SocketUtils.cs" />
     <Compile Include="Net\WebClientUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

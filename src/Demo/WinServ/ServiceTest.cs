@@ -9,14 +9,14 @@ using System.Text;
 using System.Configuration;
 using System.IO;
 using System.Threading;
-using utils;
+using Nkit.IO;
 
 namespace WinServ
 {
     public partial class ServiceTest : ServiceBase
     {
         private string[] _processAddress;
-        private LogHelper _logHelper;
+        private LogH _logH;
         
         public ServiceTest()
         {
@@ -29,6 +29,7 @@ namespace WinServ
         {
             try
             {
+                _logH = new LogH();
                 string strProcessAddress = ConfigurationManager.AppSettings["ProcessAddress"].ToString();
                 if (strProcessAddress.Trim() != "")
                 {
@@ -38,13 +39,10 @@ namespace WinServ
                 {
                     throw new Exception("读取配置档ProcessAddress失败，ProcessAddress为空！");
                 }
-
-                string logPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log");
-                _logHelper = new LogHelper(logPath);
             }
             catch (Exception ex)
             {
-                _logHelper.Log("Watcher()初始化出错！错误描述为：" + ex.Message.ToString());
+                _logH.Log("Watcher()初始化出错！错误描述为：" + ex.Message.ToString());
             }
         }
         protected override void OnStart(string[] args)
@@ -53,14 +51,14 @@ namespace WinServ
             {
                 sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Start.");
             }
-
+            _logH.Log("start");
             try
             {
                 this.StartWatch();
             }
             catch (Exception ex)
             {
-                _logHelper.Log("OnStart() 出错，错误描述：" + ex.Message.ToString());
+                _logH.Log("OnStart() 出错，错误描述：" + ex.Message.ToString());
             }
         }
 
@@ -70,6 +68,7 @@ namespace WinServ
             {
                 sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Stop.");
             }
+            _logH.Log("stop");
         }
 
         private void StartWatch()
@@ -98,14 +97,14 @@ namespace WinServ
                     {
                         if (this.FormatPath(address) == this.FormatPath(p.MainModule.FileName.ToString()))
                         {
-                            _logHelper.Log("进程(" + p.Id.ToString() + ")(" + p.ProcessName.ToString() + ")已经启动。");
+                            _logH.Log("进程(" + p.Id.ToString() + ")(" + p.ProcessName.ToString() + ")已经启动。");
                             this.WatchProcess(p, address);
                             return;
                         }
                     }
                     catch
                     {
-                        _logHelper.Log("进程(" + p.Id.ToString() + ")(" + p.ProcessName.ToString() + ")拒绝访问全路径！");
+                        _logH.Log("进程(" + p.Id.ToString() + ")(" + p.ProcessName.ToString() + ")拒绝访问全路径！");
                     }
                 }
             }
@@ -114,7 +113,7 @@ namespace WinServ
             process.StartInfo.FileName = address;
             process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
             process.Start();
-            _logHelper.Log("进程(" + process.Id.ToString() + ")(" + process.ProcessName.ToString() + ")未启动，自动启动。");
+            _logH.Log("进程(" + process.Id.ToString() + ")(" + process.ProcessName.ToString() + ")未启动，自动启动。");
             this.WatchProcess(process, address);
         }
 
@@ -131,24 +130,24 @@ namespace WinServ
         }
         public void RestartProcess(Process process, string address)
         {
-            _logHelper.Log("进程(" + process.Id.ToString() + ")(" + process.ProcessName.ToString() + ")开启监控。");
+            _logH.Log("进程(" + process.Id.ToString() + ")(" + process.ProcessName.ToString() + ")开启监控。");
             try
             {
                 while (true)
                 {
                     process.WaitForExit();
-                    _logHelper.Log("进程(" + process.Id.ToString() + ")(" + process.ProcessName.ToString() + ")退出。");
+                    _logH.Log("进程(" + process.Id.ToString() + ")(" + process.ProcessName.ToString() + ")退出。");
                     process.Close();
                     process.StartInfo.FileName = address;
                     process.Start();
-                    _logHelper.Log("进程(" + process.Id.ToString() + ")(" + process.ProcessName.ToString() + ")重启。");
+                    _logH.Log("进程(" + process.Id.ToString() + ")(" + process.ProcessName.ToString() + ")重启。");
 
                     Thread.Sleep(1000);
                 }
             }
             catch (Exception ex)
             {
-                _logHelper.Log("RestartProcess() 出错，监控程序已取消对进程("
+                _logH.Log("RestartProcess() 出错，监控程序已取消对进程("
                     + process.Id.ToString() + ")(" + process.ProcessName.ToString()
                     + ")的监控，错误描述为：" + ex.Message.ToString());
             }

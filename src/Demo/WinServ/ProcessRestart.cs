@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
+using Nkit.IO;
 
 namespace WinServ
 {
@@ -39,8 +40,7 @@ namespace WinServ
             }
             catch (Exception ex)
             {
-                string logPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "log");
-                utils.LogHelper _logHelper = new utils.LogHelper(logPath);
+                LogH _logHelper = new LogH();
                 _logHelper.Log("RestartProcess() 出错，监控程序已取消对进程("
                     + this._process.Id.ToString() + ")(" + this._process.ProcessName.ToString()
                     + ")的监控，错误描述为：" + ex.Message.ToString());

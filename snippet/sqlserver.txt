@@ -1,0 +1,89 @@
+
+
+======================================================================================
+
+string connectStr = "Integrated Security=SSPI;initial catalog=test;data source=.\\SQLEXPRESS";
+string ConnectionStr="Data Source=10.101.1.1;Initial Catalog=test;User Id=sa;Password=****"
+
+using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=kcgl2015;User Id=sa;Password=sa;"))
+
+---------------------------------------------------------------------------------------
+
+C:\Users\Administrator>sqlcmd -S 10.101.1.1 -U sa -P *****
+1> go
+1> use test
+2> go
+已将数据库上下文更改为 'test'。
+1> select name from sysobjects where xtype = 'U' and name like 'HMI%'
+2> go
+
+---------------------------------------------------------------------------------------
+
+
+--trigger
+--drop trigger insert_table_trg
+create trigger insert_table_trg
+on table1
+for insert
+as
+	declare @i bigint
+		,@a bigint
+	select @a=([type] & cast(4278190095 as bigint)) from inserted
+	if(@a=150994946)
+	begin
+		select @i=ID from inserted
+		insert into table1(ID)
+		values(@i)
+	end
+go
+
+
+--------------------------------------------
+
+--exec proc_test '1','''B1''
+--
+--drop procedure proc_test
+create procedure proc_test
+@Id nvarchar(5),
+@Text nvarchar(10)
+as
+
+--update
+--insert
+--delete
+
+declare @cond varchar(200)
+
+set @cond =' and [ID]='''+@Id+''''
+if(@Text <>'')
+begin
+	set @cond +=' and [Text] in('+Text+')'
+end
+
+declare @cmd nvarchar(800)
+set @cmd ='select * from table1 where 1=1 '+@cond
+
+exec (@cmd)
+
+---------------------------------------------
+
+alter table table1 alter column col1  [nvarchar](200) NULL
+alter table table1 add col1 varchar(10) null
+
+create index idx_table1 on table1 (Id,[Text])
+
+---------------------------------------------------------------------
+
+update a set a.col1='1' from table1 a, table2 b where a.id=b.id
+
+
+---------------------------------------------
+
+select cast((convert(varchar(10),getdate()-1,120) +' 03:00:00') as datetime)
+select getdate()
+select convert(varchar(10),getdate(),120)
+
+---------------------------------------------------------------------------------------
+
+
+
