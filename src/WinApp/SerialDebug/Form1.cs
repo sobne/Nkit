@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
-using Nkit.Utils;
+using Nkit.Core.Utils;
 using Nkit.IO;
+using Nkit.Core;
 
 namespace SerialDebug
 {

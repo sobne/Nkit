@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net.Sockets;
-using Nkit.Utils;
+using Nkit.Core.Utils;
+using Nkit.Core;
 
 namespace Nkit.Net
 {

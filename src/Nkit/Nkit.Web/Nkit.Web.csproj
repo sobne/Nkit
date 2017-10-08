@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{BA2D545B-E8C9-4844-87BB-7DA133AB500F}</ProjectGuid>
+    <ProjectGuid>{E1EF472B-8CF0-4C37-A8E4-1B59D80D6C00}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nkit</RootNamespace>
-    <AssemblyName>Nkit</AssemblyName>
+    <RootNamespace>Nkit.Web</RootNamespace>
+    <AssemblyName>Nkit.Web</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,11 +32,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -47,35 +50,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Base.cs" />
-    <Compile Include="Core\Utils\DateHelper.cs" />
-    <Compile Include="Security\iSecurity.cs" />
-    <Compile Include="Core\StaticExtension.cs" />
-    <Compile Include="Core\Utils\StringHelper.cs" />
-    <Compile Include="Core\Utils\VerifyHelper.cs" />
-    <Compile Include="Core\Utils\XMLHelper.cs" />
-    <Compile Include="Data\DataTableH.cs" />
-    <Compile Include="Drawing\ImageH.cs" />
-    <Compile Include="Exceptions\CustomerException.cs" />
-    <Compile Include="Core\Expression\CharsetExp.cs" />
-    <Compile Include="Core\Expression\CodeExp.cs" />
-    <Compile Include="Core\Expression\CopyRightExp.cs" />
-    <Compile Include="Core\Expression\RegularExp.cs" />
-    <Compile Include="IO\FileHelper.cs" />
-    <Compile Include="IO\LogH.cs" />
-    <Compile Include="Net\EmailUtils.cs" />
-    <Compile Include="Net\FtpUtils.cs" />
-    <Compile Include="Net\SocketUtils.cs" />
-    <Compile Include="Net\WebClientUtils.cs" />
+    <Compile Include="HtmlHelper.cs" />
+    <Compile Include="JScriptHelper.cs" />
+    <Compile Include="JsonHelper.cs" />
+    <Compile Include="MetaUtils.cs" />
+    <Compile Include="Object\CacheAccessor.cs" />
+    <Compile Include="Object\ResponseAccessor.cs" />
+    <Compile Include="Object\ServerAccessorcs.cs" />
+    <Compile Include="PageHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\Utils\CfgHelper.cs" />
-    <Compile Include="Core\Convertor.cs" />
-    <Compile Include="IO\SerialCom.cs" />
-    <Compile Include="Security\Aes.cs" />
-    <Compile Include="Security\Base64.cs" />
+    <Compile Include="RssHelper.cs" />
+    <Compile Include="RssUtility.cs" />
     <Compile Include="Security\Des.cs" />
-    <Compile Include="Security\Sha.cs" />
-    <Compile Include="Security\Shift.cs" />
+    <Compile Include="Security\Md5.cs" />
+    <Compile Include="ValidateHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nkit\Nkit.csproj">
+      <Project>{BA2D545B-E8C9-4844-87BB-7DA133AB500F}</Project>
+      <Name>Nkit %28Nkit\Nkit%29</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

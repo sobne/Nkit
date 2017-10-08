@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Nkit.Utils;
+using Nkit.Core.Utils;
+using Nkit.Core;
 
 namespace CvtApp
 {
