@@ -22,7 +22,7 @@ using System.Web.UI;
 using System.Web.Caching;
 using System.Net;
 using System.IO;
-using Nkit;
+using Nkit.Core;
 
 namespace Nkit.Web.Object
 {

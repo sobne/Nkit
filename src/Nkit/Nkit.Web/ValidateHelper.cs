@@ -17,7 +17,6 @@
 */
 using System;
 using System.Text;
-using System.Web.Security;//web应用程序加密
 using System.Web;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -88,24 +87,6 @@ namespace Nkit.Web
                 image.Dispose();
             }
         }
-        /// <summary>
-        /// encrypting string
-        /// </summary>
-        /// <param name="Password">before encrypt string</param>
-        /// <returns></returns>
-        public static string Encrypt(string Password)
-        {
-            FormsAuthenticationTicket ticket = new System.Web.Security.FormsAuthenticationTicket(Password, true, 2);
-            return FormsAuthentication.Encrypt(ticket).ToString();
-        }
-        /// <summary>
-        /// decrypt string
-        /// </summary>
-        /// <param name="Passowrd">encrypted string</param>
-        /// <returns></returns>
-        public static string Decrypt(string Passowrd)
-        {
-            return FormsAuthentication.Decrypt(Passowrd).Name.ToString();
-        }
+       
     }
 }

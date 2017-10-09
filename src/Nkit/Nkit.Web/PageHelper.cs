@@ -43,22 +43,4 @@ namespace Nkit.Web
             JScriptHelper.RegistClientScript(page, "showCtrl", script.ToString());
         }
     }
-    public class PageFetcher
-    {
-        // 获取网页文本
-        public static string FetchPage(string url)
-        {
-            String result;
-            HttpWebRequest request = (HttpWebRequest)System.Net.HttpWebRequest.Create(url);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Encoding enc = System.Text.Encoding.UTF8;
-            using (StreamReader sr = new StreamReader(response.GetResponseStream(), enc))
-            {
-                result = sr.ReadToEnd();
-                sr.Close();
-            }
-            return result;
-        }
-
-    }
 }

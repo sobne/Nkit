@@ -22,6 +22,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using Nkit.Core.Utils;
+using Nkit.Net;
 
 namespace Nkit.Web
 {
@@ -136,7 +137,7 @@ namespace Nkit.Web
         /// <returns></returns>
         public static RssUtility GetRss(string url)
         {
-            string xml =PageFetcher.FetchPage(url);
+            string xml =new WebRequest().FetchPage(url);
             return XMLHelper.LoadXmlString(xml, typeof(RssUtility)) as RssUtility;
         }
     }
