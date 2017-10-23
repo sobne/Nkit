@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Nkit.Web
 {
-    public class JsonHelper
+    public class JsonUtils
     {
-        public JsonHelper()
+        public JsonUtils()
         {
             //
             //TODO: 在此处添加构造函数逻辑
