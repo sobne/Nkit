@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="keywords" content="@ViewBag.keywords" />
+    <meta name="description" content="@ViewBag.description" />
+    <title>@ViewBag.Title</title>
+	<style>
+	/* CSS Document */
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,form,img,dl,dt,dd,table,th,td,blockquote,fieldset,div,strong,label,em{margin:0;padding:0;border:0;}
+ul,ol,li{list-style:none;}
+input,button{margin:0;font-size:12px;vertical-align:middle;}
+body{font-size:12px;font-family:Arial, Helvetica, sans-serif;  text-align:center; margin:0 auto;}
+
+a{color:#333;text-decoration:none;}
+a:hover{color:#ef9b11; text-decoration:underline;}
+
+BODY {BACKGROUND-POSITION: 0px -44px; BACKGROUND-REPEAT: repeat-x}
+
+.clear {clear: both;}
+
+p {display: block;}
+
+del {text-decoration: line-through;}
+.float_Left {float: left;}
+
+
+
+	</style>
+    <script src="../jquery-1.10.2.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+<div class="imgList">
+    <a><img src="img/ico1.gif"/></a>
+    <a><img src="img/ico2.gif"/></a>
+    <a><img src="img/ico3.gif"/></a>
+    <a><img src="img/ico4.gif"/></a>
+</div>
+<script type="text/javascript" src="../jquery.widget.js""></script>
+<script type="text/javascript">
+	$(function () {
+		$(".imgList").hilightIMG();
+	});
+</script>
+
+<div class="clear"></div>
+
+
+
+</body>
+</html>

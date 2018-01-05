@@ -13,7 +13,7 @@ namespace Nkit.Web.Security
         /// </summary>
         /// <param name="str">before encrypt string</param>
         /// <returns></returns>
-        public string Encrypt(string str)
+        public static string Encrypt(string str)
         {
             FormsAuthenticationTicket ticket = new System.Web.Security.FormsAuthenticationTicket(str, true, 2);
             return FormsAuthentication.Encrypt(ticket).ToString();
@@ -23,7 +23,7 @@ namespace Nkit.Web.Security
         /// </summary>
         /// <param name="str">encrypted string</param>
         /// <returns></returns>
-        public string Decrypt(string str)
+        public static string Decrypt(string str)
         {
             return FormsAuthentication.Decrypt(str).Name.ToString();
         }

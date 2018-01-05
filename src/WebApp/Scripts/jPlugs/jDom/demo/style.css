@@ -1,0 +1,52 @@
+.linkbutton {
+    padding: .4em .9em; /*em的好处就是随着父元素的字体大小而变化，当该元素的字体变化时，会自适应*/
+    border: 1px solid rgba(0,0,0,.1);
+    background-color: #ac0;
+    border-radius: .2em;
+    box-shadow: 0 1px 5px rgba(0,0,0,.5);
+    color: #fff;
+    text-shadow: 0 -.06em .24em rgba(0,0,0,.5); /*将阴影设置为半透明，就无所谓底色了，都能很好地适应*/
+    font-size: 130%; 
+    line-height: 1.5; /*行高是字号的1.5倍*/
+    display:inline-block;
+    cursor:pointer;
+    font-family: "微软雅黑";
+}
+
+.tableBox{
+    width:1200px;
+    background:#f9f9f9;
+    margin:20px auto 0;
+    padding:6px;
+    position:relative;
+    font-family: 微软雅黑;
+}
+
+.tableBox table{
+    width:100%;
+    border:2px solid #fff;
+    
+}
+
+.tableBox table tr {
+    border-collapse: separate;   
+    border-spacing: 1px;
+}
+
+/*选中行*/
+.tableBox table tr.selected {
+    background:#cce4f3;
+} 
+
+/*表头*/
+.tableBox  th{  
+    background: #eaeaea;
+    padding: 6px;
+    color: #666;
+    font-size: 14px;
+}
+
+.tableBox  td {
+    font-size: 13px;
+    padding: 4px 10px;
+}

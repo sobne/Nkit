@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="style.css"/>
+    </head>
+    <body>
+        <a id='btn0'></a>
+        <div id='grid0'></div>
+    </body>
+    <script type="text/javascript" src="../jDom.js"></script>
+    <script>
+        $('#btn0').linkbutton({
+            text : '测试' ,
+            click : function(){
+                if(grid0.getSize() < 1){
+                    alert('请选择一条数据！');
+                    return;
+                }
+                alert('您选择的是' + JSON.stringify(grid0.getSelected()));
+            }
+        });
+        var grid0 = mui.get('#grid0').dataGrid({
+            header : [
+                {name:'ID' ,  width:10 , type : 'checkColumn' } ,
+                {name:'标题' , type : 'column' , field : 'title'} ,
+                {name:'分类' , type : 'column' , field : 'type'} ,
+                {name:'作者' ,  type : 'column' , field : 'author'} ,
+                {name:'时间' ,  type : 'column' , field : 'time'} ,
+            ] ,
+            
+        });
+        
+        
+        grid0.load([
+            {title : '111' , type : 'A' , author : '张三' , time : '2015'} ,
+            {title : '222' , type : 'B' , author : '李四' , time : '2015'} ,
+            {title : '333' , type : 'C' , author : '王五' , time : '2015'} ,
+            {title : '444' , type : 'D' , author : '赵六' , time : '2015'} ,
+        ]);
+    </script>
+</html>
