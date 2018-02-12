@@ -59,6 +59,8 @@
     <Compile Include="Core\Base.cs" />
     <Compile Include="Core\Utils\DateHelper.cs" />
     <Compile Include="Core\Utils\JsonHelper.cs" />
+    <Compile Include="Net\NetHelper.cs" />
+    <Compile Include="Net\Sockets\UdpUtils.cs" />
     <Compile Include="Net\WebRequest.cs" />
     <Compile Include="Security\iSecurity.cs" />
     <Compile Include="Core\StaticExtension.cs" />

@@ -69,7 +69,7 @@ namespace Nkit.Core
             //    sb.Append(ascii[i]);
             //}
             //return sb.ToString();
-            return Encoding.ASCII.GetString(bytes);
+            return Encoding.UTF8.GetString(bytes);
         }
         public static string Dec2Hex(int dec)
         {

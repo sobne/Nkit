@@ -59,6 +59,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuartzDemo", "Demo\QuartzDe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nkit.Job", "Nkit\Nkit.Job\Nkit.Job.csproj", "{87E1C43A-E714-4FDF-8F37-DED4D2C1CDB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAssist", "WinApp\NetAssist\NetAssist.csproj", "{7339F941-5E68-4E9F-9477-7D6C6D4D1D70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -137,6 +139,10 @@ Global
 		{87E1C43A-E714-4FDF-8F37-DED4D2C1CDB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87E1C43A-E714-4FDF-8F37-DED4D2C1CDB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87E1C43A-E714-4FDF-8F37-DED4D2C1CDB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7339F941-5E68-4E9F-9477-7D6C6D4D1D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7339F941-5E68-4E9F-9477-7D6C6D4D1D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7339F941-5E68-4E9F-9477-7D6C6D4D1D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7339F941-5E68-4E9F-9477-7D6C6D4D1D70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,6 +170,7 @@ Global
 		{3AA221BF-FA1B-4CB2-956C-D886FD37BB0D} = {A1AAF59B-FD07-4C92-9C71-280788438082}
 		{8A0AADA0-4505-47CB-963B-452CACA3CAB7} = {38DDD108-FACA-4D27-A050-49E1B2C93B09}
 		{87E1C43A-E714-4FDF-8F37-DED4D2C1CDB7} = {A1AAF59B-FD07-4C92-9C71-280788438082}
+		{7339F941-5E68-4E9F-9477-7D6C6D4D1D70} = {63206A7C-B0C2-4EB7-8C4B-DBC357A17272}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D068818-047A-4D13-B697-5CD788510A9A}

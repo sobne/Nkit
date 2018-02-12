@@ -4,37 +4,61 @@ using System.Linq;
 using System.Text;
 using System.Net.Sockets;
 using System.Net;
+using System.Threading;
 
 namespace UdpMonitor
 {
     class Program
     {
+        static private UdpClient _udpClient=null;
+        static private IPEndPoint _remoteEP = null;
         static void Main(string[] args)
         {
-            UdpClient udpClient = new UdpClient(50000);
-            IPAddress serverIP = IPAddress.Parse("127.0.0.1");
-            IPEndPoint server = new IPEndPoint(serverIP, 50000);
+            var localIP = IPAddress.Parse("127.0.0.1");
+            var localEP = new IPEndPoint(localIP, 50000);
+            _udpClient = new UdpClient(localEP);
+
             Console.WriteLine("开始侦听端口:");
+
+            //var thread = new Thread(Receive)
+            //{
+            //    IsBackground = true
+            //};
+            //thread.Start();
+            Receive();
+            Console.ReadLine();
+        }
+        static void Receive()
+        {
+            _remoteEP = new IPEndPoint(IPAddress.Any,0);
             while (true)
             {
-                string receiveString = string.Empty;
-                byte[] receiveArray = udpClient.Receive(ref server);
-                foreach (byte b in receiveArray)
+                try
                 {
-                    if (b.ToString("X").Length < 2)
+                    var receiveString = string.Empty;
+                    byte[] receiveBuffer = _udpClient.Receive(ref _remoteEP);
+                    if (receiveBuffer != null)
                     {
-                        receiveString += "0" + b.ToString("X") + " ";
+                        foreach (byte b in receiveBuffer)
+                        {
+                            if (b.ToString("X").Length < 2)
+                            {
+                                receiveString += "0" + b.ToString("X") + " ";
+                            }
+                            else
+                            {
+                                receiveString += b.ToString("X") + " ";
+                            }
+                        }
                     }
-                    else
-                    {
-                        receiveString += b.ToString("X") + " ";
-                    }
+                    Console.WriteLine(receiveString);
+                    Console.WriteLine(Encoding.Default.GetString(receiveBuffer));
                 }
-                Console.WriteLine(receiveString);
-                Console.WriteLine(Encoding.Default.GetString(receiveArray));
-
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            udpClient.Close();
         }
     }
 }
