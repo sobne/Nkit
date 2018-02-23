@@ -61,6 +61,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nkit.Job", "Nkit\Nkit.Job\N
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAssist", "WinApp\NetAssist\NetAssist.csproj", "{7339F941-5E68-4E9F-9477-7D6C6D4D1D70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnCrypt", "WinApp\EnCrypt\EnCrypt.csproj", "{54351B3D-932D-4E4D-BDD1-CF6E277DD6BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,10 @@ Global
 		{7339F941-5E68-4E9F-9477-7D6C6D4D1D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7339F941-5E68-4E9F-9477-7D6C6D4D1D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7339F941-5E68-4E9F-9477-7D6C6D4D1D70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54351B3D-932D-4E4D-BDD1-CF6E277DD6BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54351B3D-932D-4E4D-BDD1-CF6E277DD6BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54351B3D-932D-4E4D-BDD1-CF6E277DD6BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54351B3D-932D-4E4D-BDD1-CF6E277DD6BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,6 +177,7 @@ Global
 		{8A0AADA0-4505-47CB-963B-452CACA3CAB7} = {38DDD108-FACA-4D27-A050-49E1B2C93B09}
 		{87E1C43A-E714-4FDF-8F37-DED4D2C1CDB7} = {A1AAF59B-FD07-4C92-9C71-280788438082}
 		{7339F941-5E68-4E9F-9477-7D6C6D4D1D70} = {63206A7C-B0C2-4EB7-8C4B-DBC357A17272}
+		{54351B3D-932D-4E4D-BDD1-CF6E277DD6BD} = {63206A7C-B0C2-4EB7-8C4B-DBC357A17272}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D068818-047A-4D13-B697-5CD788510A9A}
