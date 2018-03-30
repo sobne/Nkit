@@ -106,8 +106,17 @@ update a set a.col1='1' from table1 a, table2 b where a.id=b.id
 select cast((convert(varchar(10),getdate()-1,120) +' 03:00:00') as datetime)
 select getdate()
 select convert(varchar(10),getdate(),120)
+select dateadd(hour,-1,getdate())
 
 ---------------------------------------------------------------------------------------
 
+--add linked server
+exec sp_addlinkedserver   'ITSV', '', 'SQLOLEDB', '192.168.1.1' 
+exec sp_addlinkedsrvlogin  'ITSV', 'false',null, 'sa', 'password' 
+--drop linked server
+exec sp_dropserver  'ITSV', 'droplogins' 
 
+--process
+select * from ITSV.master.dbo.table1 
 
+---------------------------------------------------------------------------------------
