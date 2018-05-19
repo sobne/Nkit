@@ -1,0 +1,5 @@
+C:\Users\xiaobin>cd/d D:\Redis
+S====
+redis-server.exe redis.conf
+C====
+redis-cli.exe -h 127.0.0.1 -p 6379

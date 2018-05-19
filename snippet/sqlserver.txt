@@ -17,6 +17,52 @@ C:\Users\Administrator>sqlcmd -S 10.101.1.1 -U sa -P *****
 1> select name from sysobjects where xtype = 'U' and name like 'HMI%'
 2> go
 
+
+
+select name from sysobjects where xtype = 'U' and name like 'B_%'
+select syscolumns.*,sysobjects.xtype 
+	from syscolumns join sysobjects on syscolumns.id=sysobjects.id and sysobjects.xtype='U' 
+	order by syscolumns.id,colid
+
+SP_COLUMNS USER
+select * from funcgetcolumns() where 表名='USER' order by 表标识,字段序号
+
+CREATE FUNCTION funcgetcolumns()
+RETURNS TABLE
+as
+return 
+(
+	SELECT
+表标识=A.id,
+表名 = D.name,
+表名1 = Case When A.colorder=1 Then D.name Else '' End,
+表说明 = Case When A.colorder=1 Then isnull(F.value,'') Else '' End,
+字段序号 = A.colorder,
+字段名 = A.name,
+字段说明 = isnull(G.[value],''),
+标识 = Case When COLUMNPROPERTY( A.id,A.name,'IsIdentity')=1 Then '√'Else '' End,
+主键 = Case When exists(SELECT 1 FROM sysobjects Where xtype='PK' and parent_obj=A.id and name in (
+SELECT name FROM sysindexes WHERE indid in( SELECT indid FROM sysindexkeys WHERE id = A.id AND colid=A.colid))) then '√' else '' end,
+类型 = B.name,
+占用字节数 = A.Length,
+长度 = COLUMNPROPERTY(A.id,A.name,'PRECISION'),
+小数位数 = isnull(COLUMNPROPERTY(A.id,A.name,'Scale'),0),
+允许空 = Case When A.isnullable=1 Then '√'Else '' End,
+默认值 = isnull(E.Text,'')
+FROM syscolumns A 
+Left Join systypes B On A.xusertype=B.xusertype
+Inner Join sysobjects D On A.id=D.id and D.xtype='U' and D.name<>'dtproperties'
+Left Join syscomments E on A.cdefault=E.id
+Left Join sys.extended_properties G on A.id=G.major_id and A.colid=G.minor_id
+Left Join sys.extended_properties F On D.id=F.major_id and F.minor_id=0
+--where d.name='USER' --如果只查询指定表,加上此条件
+--Order By A.id,A.colorder
+)
+GO
+
+
+
+
 ---------------------------------------------------------------------------------------
 
 
@@ -96,6 +142,8 @@ alter table table1 add col1 varchar(10) null
 
 create index idx_table1 on table1 (Id,[Text])
 
+EXEC sys.sp_addextendedproperty @level1name=N'table1',@level2name=N'col1' , @value=N'col1字段说明',@name=N'MS_Description',@level2type=N'COLUMN', @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE'
+GO
 ---------------------------------------------------------------------
 
 update a set a.col1='1' from table1 a, table2 b where a.id=b.id
@@ -107,6 +155,9 @@ select cast((convert(varchar(10),getdate()-1,120) +' 03:00:00') as datetime)
 select getdate()
 select convert(varchar(10),getdate(),120)
 select dateadd(hour,-1,getdate())
+
+
+select * from t1 where c1 like 'D\_%' escape '\'  --下划线转义
 
 ---------------------------------------------------------------------------------------
 

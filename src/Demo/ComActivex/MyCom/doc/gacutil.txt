@@ -1,0 +1,28 @@
+Setting environment for using Microsoft Visual Studio 2008 x86 tools.
+
+C:\Windows\System32>gacutil /i F:\Release\MyCom.dll
+Microsoft (R) .NET Global Assembly Cache Utility.  Version 3.5.30729.1
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+程序集已成功添加到缓存中
+
+C:\Windows\System32>regasm F:\Release\MyCom.dll
+Microsoft(R) .NET Framework 程序集注册实用工具 2.0.50727.8745
+版权所有(C) Microsoft Corporation 1998-2004。保留所有权利。
+
+成功注册了类型
+
+C:\Windows\System32>regasm /u F:\Release\MyCom.dll
+Microsoft(R) .NET Framework 程序集注册实用工具 2.0.50727.8745
+版权所有(C) Microsoft Corporation 1998-2004。保留所有权利。
+
+成功注销了类型
+
+C:\Windows\System32>gacutil /u F:\Release\MyCom.dll
+Microsoft (R) .NET Global Assembly Cache Utility.  Version 3.5.30729.1
+版权所有(C) Microsoft Corporation。保留所有权利。
+
+从缓存中移除程序集失败: 文件或程序集名称无效。文件名必须是程序集名称后加上 .dll 或 .exe 扩展名。
+
+C:\Windows\System32>
+

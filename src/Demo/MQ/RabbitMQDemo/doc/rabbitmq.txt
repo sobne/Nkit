@@ -1,0 +1,23 @@
+install erlang
+install rabbitmq
+
+# [Erlang/OTP](https://www.erlang.org)
+
+# [RabbitMQ] http://www.rabbitmq.com/download.html
+
+
+
+http://localhost:15672/#/  guest guest  test test
+C:\Users\xiaobin>cd/d D:\Program Files\RabbitMQ Server\rabbitmq_server-3.6.12\sbin
+rabbitmqctl.bat list_users
+rabbitmqctl.bat add_user test test
+
+rabbitmq-plugins.bat enable rabbitmq_management
+
+net stop RabbitMQ && net start RabbitMQ
+
+net stop rabbitMQ
+rabbitmq-server stop
+rabbitmq-server start
+
+amqp://guest:guest@localhost:5672/

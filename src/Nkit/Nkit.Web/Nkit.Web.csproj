@@ -81,7 +81,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Nkit\Nkit.csproj">
       <Project>{BA2D545B-E8C9-4844-87BB-7DA133AB500F}</Project>
-      <Name>Nkit %28Nkit\Nkit%29</Name>
+      <Name>Nkit</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
