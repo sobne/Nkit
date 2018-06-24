@@ -45,6 +45,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -60,6 +61,7 @@
     <Compile Include="Core\Utils\ConsoleUtil.cs" />
     <Compile Include="Core\Utils\DateHelper.cs" />
     <Compile Include="Core\Utils\JsonHelper.cs" />
+    <Compile Include="Data\MemCache.cs" />
     <Compile Include="Net\NetHelper.cs" />
     <Compile Include="Net\Sockets\UdpUtils.cs" />
     <Compile Include="Net\WebRequest.cs" />

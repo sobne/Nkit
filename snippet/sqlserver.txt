@@ -63,6 +63,23 @@ GO
 
 
 
+Create Function PadLeft(@OriginalString varchar(20),@PaddingChar char(1),@TotalLength int)
+Returns Varchar(20) As
+Begin
+	Declare @NewString varchar(20)
+	Select @NewString = IsNull(Replicate(@PaddingChar,@TotalLength - Len(isnull(@OriginalString ,0))), '') + @OriginalString
+	Return @NewString
+End
+Create Function PadRight(@OriginalString varchar(20),@PaddingChar char(1),@TotalLength int)
+Returns Varchar(20) As
+Begin
+	Declare @NewString varchar(20)
+	Select @NewString = @OriginalString + IsNull(Replicate(@PaddingChar,@TotalLength - Len(isnull(@OriginalString ,0))), '')
+	Return @NewString
+End
+Select dbo.PadLeft('101', '0', 6) --000101
+Select dbo.PadRight('101', '0', 6) --101000
+
 ---------------------------------------------------------------------------------------
 
 
@@ -155,7 +172,9 @@ select cast((convert(varchar(10),getdate()-1,120) +' 03:00:00') as datetime)
 select getdate()
 select convert(varchar(10),getdate(),120)
 select dateadd(hour,-1,getdate())
-
+select Convert(varchar(2),datepart(second,getdate())) 
+select Convert(int,datepart(second,getdate())) 
+select cast(convert(varchar(19),getdate(),120) as datetime)
 
 select * from t1 where c1 like 'D\_%' escape '\'  --下划线转义
 

@@ -1,0 +1,9 @@
+
+
+2018-06-22 Nkit.Db.Ado	- ado.net include:msSql|Oracle|OleDB|SQLite
+2018-06-11 Nkit.Redis	- auto reconnect
+2018-05-28 Queue 	- demo
+2018-05-23 MemCache 	- utils & demo
+2018-05-22 Nkit.Redis 	- serialize using by Newtonsoft.Json
+
+2018-04-11 RabbitMQDemo

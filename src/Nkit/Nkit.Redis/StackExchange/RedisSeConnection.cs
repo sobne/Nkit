@@ -59,7 +59,7 @@ namespace Nkit.Redis.StackExchange
         }
         private static void MuxerConnectionFailed(object sender, ConnectionFailedEventArgs e)
         {
-            //Console.WriteLine("重新连接：Endpoint failed: " + e.EndPoint + ", " + e.FailureType + (e.Exception == null ? "" : (", " + e.Exception.Message)));
+            Console.WriteLine("重新连接：Endpoint failed: " + e.EndPoint + ", " + e.FailureType + (e.Exception == null ? "" : (", " + e.Exception.Message)));
         }
     }
     
