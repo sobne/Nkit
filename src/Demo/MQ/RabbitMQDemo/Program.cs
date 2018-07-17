@@ -18,11 +18,17 @@ namespace RabbitMQDemo
             string method = ConfigurationManager.AppSettings["method"];
             switch (method)
             {
-                case "publisher":
-                    publisher();
+                case "ttlpublisher":
+                    ttlpublisher();
                     break;
-                case "consumer":
-                    consumer();
+                case "ttlconsumer":
+                    ttlconsumer();
+                    break;
+                case "basicpublisher":
+                    basicpublisher();
+                    break;
+                case "basicconsumer":
+                    basicconsumer();
                     break;
                 case "subcribepublish":
                     subcribepublish();
@@ -41,8 +47,82 @@ namespace RabbitMQDemo
             }
             Console.ReadLine();
         }
+        static void writeLine(string msg)
+        {
+            Console.WriteLine("{0}:{1}", DateTime.Now.ToString("MM-dd HH:mm:ss.fff"), msg);
+        }
+        #region ttl
+        static void ttlpublisher()
+        {
+            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            using (var connection = factory.CreateConnection())
+            {
+                using (var channel = connection.CreateModel())
+                {
+                    string queue = string.Format("MQ{0}.TTL", _appID);
+                    var args = new Dictionary<string, object>();
+                    args.Add("x-message-ttl", 10000);
+                    channel.QueueDeclare(queue, false, false, false, args);
+
+                    while (true)
+                    {
+                        Console.Write("请输入要发送的消息(消息10s后过期)：");
+                        var message = Console.ReadLine();
+                        var body = Encoding.UTF8.GetBytes(message);
+
+                        channel.BasicPublish("", queue, null, body);
+
+                        writeLine(string.Format("已发送的消息：{0}",message));
+                    }
+                }
+            }
+        }
+        static void ttlconsumer()
+        {
+            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            using (var connection = factory.CreateConnection())
+            {
+                using (var channel = connection.CreateModel())
+                {
+                    string queue = string.Format("MQ{0}.TTL", _appID);
+                    var args = new Dictionary<string, object>();
+                    args.Add("x-message-ttl", 10000);
+                    channel.QueueDeclare(queue, false, false, false, args);
+
+                    Console.WriteLine("准备接收消息(消息10s后过期)：");
+                    while (true)
+                    {
+                        string input = Console.ReadLine();
+                        if (input.ToLower() == "quit")
+                        {
+                            return;
+                        }
+                        else if (input.ToLower() == "get")
+                        {
+                            while (true)
+                            {
+                                var bgr = channel.BasicGet(queue, true);
+                                if (bgr == null)
+                                {
+                                    writeLine("没有消息");
+                                    break;
+                                }
+                                else
+                                {
+                                    var message = Encoding.UTF8.GetString(bgr.Body);
+                                    writeLine(string.Format("接收消息-总数[{0}] - {1}", bgr.MessageCount, message));
+                                }
+                                Thread.Sleep(20);
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+        #endregion
         #region basic
-        static void publisher()
+        static void basicpublisher()
         {
             var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
             using (var connection = factory.CreateConnection())
@@ -66,7 +146,7 @@ namespace RabbitMQDemo
                 }
             }
         }
-        static void consumer()
+        static void basicconsumer()
         {
             var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
             using (var connection = factory.CreateConnection())
@@ -108,7 +188,7 @@ namespace RabbitMQDemo
 
                     while (true)
                     {
-                        Console.Write("请输入要发送的消息，输入格式如'RoutingKey_Message'：");
+                        Console.Write("请输入要发送的消息，输入格式如'*.RoutingKey_Message'：");
                         var keyWithMsg = Console.ReadLine();
 
                         string[] args = keyWithMsg.Split('_');

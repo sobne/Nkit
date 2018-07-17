@@ -12,6 +12,7 @@ namespace Nkit.Redis.StackExchange
         private string _host { get; }
         private int _db { get; }
         private ConnectionMultiplexer _conn;
+        private Thread _thread=null;
 
         public bool Connected = false;
         public RedisSe(string host,int db=0)
@@ -59,10 +60,12 @@ namespace Nkit.Redis.StackExchange
             Console.WriteLine("_conn_ConnectionFailed");
             Connected = false;
             //_conn.Close();
-            new Thread(Connect)
+            if (_thread != null) _thread.Abort();
+            _thread= new Thread(Connect)
             {
                 IsBackground = true
-            }.Start();
+            };
+            _thread.Start();
             //throw new NotImplementedException();
         }
 
