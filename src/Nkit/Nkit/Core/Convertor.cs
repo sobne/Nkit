@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace Nkit.Core
@@ -78,6 +79,19 @@ namespace Nkit.Core
         public static string Dec2Binary(int dec)
         {
             return Convert.ToString(dec, 2);
+        }
+
+        public static byte[] Object2Bytes(object obj)
+        {
+            var buff = new byte[Marshal.SizeOf(obj)];
+            var ptr = Marshal.UnsafeAddrOfPinnedArrayElement(buff, 0);
+            Marshal.StructureToPtr(obj, ptr, true);
+            return buff;
+        }
+        public static object Bytes2Object(byte[] buff, Type type)
+        {
+            var ptr = Marshal.UnsafeAddrOfPinnedArrayElement(buff, 0);
+            return Marshal.PtrToStructure(ptr, type);
         }
     }
 }

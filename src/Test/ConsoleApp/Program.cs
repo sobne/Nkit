@@ -1,4 +1,5 @@
-﻿using Nkit.Data;
+﻿using Nkit.Core;
+using Nkit.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             //log();
-            testCache();
-
+            //testCache();
+            testConvertor();
             Console.ReadLine();
         }
         static void log()
@@ -71,6 +72,22 @@ namespace ConsoleApp
                 new TimeSpan(0, 0, 5));
             return Name;
         }
+
+        static void testConvertor()
+        {
+            var ts = new TestStructure
+            {
+                S="tstsfsdfs",
+                I=213123,
+                DT=DateTime.Now
+            };
+            var bytTemp = Convertor.Object2Bytes(ts);
+            Console.WriteLine("数组长度：" + bytTemp.Length);
+            var tsB = (TestStructure)Convertor.Bytes2Object(bytTemp, typeof(TestStructure));
+            Console.WriteLine(tsB.ToString());
+
+            Console.ReadLine();
+        }
     }
     static class data
     {
@@ -82,5 +99,17 @@ namespace ConsoleApp
     class book
     {
         public string name { get; set; }
+    }
+
+
+    struct TestStructure
+    {
+        public string S { get; set; }
+        public int I { get; set; }
+        public DateTime DT { get; set; }
+        public override string ToString()
+        {
+            return string.Format("S:{0};I:{1};DT:{2}", S, I, DT);
+        }
     }
 }

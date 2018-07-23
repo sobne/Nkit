@@ -12,33 +12,59 @@ namespace RabbitMQDemo
 {
     class Program
     {
-        private static readonly string _appID = ConfigurationManager.AppSettings["AppID"];
+        private static string _appID = string.Empty;
+        private static string _url = string.Empty;
         static void Main(string[] args)
         {
-            string method = ConfigurationManager.AppSettings["method"];
-            switch (method)
+            _appID = ConfigurationManager.AppSettings["AppID"];
+            _url = ConfigurationManager.AppSettings["RabbitMQUri"];
+            //string method = ConfigurationManager.AppSettings["method"];
+            Console.WriteLine(">>>>please select the function<<<");
+            Console.WriteLine("A    ttlpublisher         a    ttlconsumer");
+            Console.WriteLine("B    basicpublisher       b    basicconsumer");
+            Console.WriteLine("C    subcribeproducer     c    subcribeconsumer");
+            Console.WriteLine("D    subcribepublish      d    subcribereceive");
+            Console.WriteLine("E    highpublish          e    highreceive");
+            var input = Console.ReadLine();
+            switch (input)
             {
+                case "A":
                 case "ttlpublisher":
                     ttlpublisher();
                     break;
+                case "a":
                 case "ttlconsumer":
                     ttlconsumer();
                     break;
+                case "B":
                 case "basicpublisher":
                     basicpublisher();
                     break;
+                case "b":
                 case "basicconsumer":
                     basicconsumer();
                     break;
+                case "C":
+                case "subcribeproducer":
+                    subcribeproducer();
+                    break;
+                case "c":
+                case "subcribeconsumer":
+                    subcribeconsumer();
+                    break;
+                case "D":
                 case "subcribepublish":
                     subcribepublish();
                     break;
+                case "d":
                 case "subcribereceive":
                     subcribereceive();
                     break;
+                case "E":
                 case "highpublish":
                     highpublish();
                     break;
+                case "e":
                 case "highreceive":
                     highreceive();
                     break;
@@ -54,7 +80,7 @@ namespace RabbitMQDemo
         #region ttl
         static void ttlpublisher()
         {
-            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            var factory = new ConnectionFactory { Uri = _url };
             using (var connection = factory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
@@ -79,7 +105,7 @@ namespace RabbitMQDemo
         }
         static void ttlconsumer()
         {
-            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            var factory = new ConnectionFactory { Uri = _url };
             using (var connection = factory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
@@ -124,7 +150,7 @@ namespace RabbitMQDemo
         #region basic
         static void basicpublisher()
         {
-            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            var factory = new ConnectionFactory { Uri = _url };
             using (var connection = factory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
@@ -148,7 +174,7 @@ namespace RabbitMQDemo
         }
         static void basicconsumer()
         {
-            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            var factory = new ConnectionFactory { Uri = _url };
             using (var connection = factory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
@@ -173,11 +199,102 @@ namespace RabbitMQDemo
             }
         }
         #endregion
+        #region subcribe
+        static void subcribeproducer()
+        {
+            string exchange = string.Format("Ex{0}.sc", _appID);
+            var routingKey = "*.rabbit";
 
+            var factory = new ConnectionFactory { Uri = _url };
+            using (var connection = factory.CreateConnection())
+            {
+                using (var channel = connection.CreateModel())
+                {
+                    channel.ExchangeDeclare(exchange, "topic");
+
+                    while (true)
+                    {
+                        Console.Write("请输入要发送的消息：");
+                        var message = Console.ReadLine();
+                        var body = Encoding.UTF8.GetBytes(message);
+
+                        IBasicProperties props = channel.CreateBasicProperties();
+                        props.DeliveryMode = 2;
+                        props.Expiration = "10000";
+
+
+                        channel.BasicPublish(exchange, routingKey, props, body);
+
+                        Console.WriteLine("已发送的消息： '{0}':'{1}'", routingKey, message);
+                    }
+                }
+            }
+        }
+        static void subcribeconsumer()
+        {
+            string exchange = string.Format("Ex{0}.sc", _appID);
+            var routingKey = "*.rabbit";
+
+            var factory = new ConnectionFactory { Uri = _url };
+            using (var connection = factory.CreateConnection())
+            {
+                using (var channel = connection.CreateModel())
+                {
+
+                    channel.ExchangeDeclare(exchange, "topic");
+                    var queueName = channel.QueueDeclare().QueueName;
+
+                    channel.QueueBind(queueName, exchange, routingKey);
+                    
+                    Console.WriteLine("准备接收消息>>>");
+
+                    Console.WriteLine("输入get获取消息");
+                    while (true)
+                    {
+                        string input = Console.ReadLine();
+                        if (input.ToLower() == "quit")
+                        {
+                            return;
+                        }
+                        else if (input.ToLower() == "get")
+                        {
+                            while (true)
+                            {
+                                var bgr = channel.BasicGet(queueName, true);
+                                if (bgr == null)
+                                {
+                                    writeLine("没有消息");
+                                    break;
+                                }
+                                else
+                                {
+                                    var message = Encoding.UTF8.GetString(bgr.Body);
+                                    writeLine(string.Format("接收消息-总数[{0}] - {1}", bgr.MessageCount, message));
+                                }
+                                Thread.Sleep(20);
+                            }
+
+                        }
+                    }
+
+
+                    //var consumer = new EventingBasicConsumer(channel);
+
+                    //consumer.Received += (s, e) =>
+                    //{
+                    //    var message = Encoding.UTF8.GetString(e.Body);
+                    //    Console.WriteLine("接收到的消息： '{0}':'{1}'", e.RoutingKey, message);
+                    //};
+                    //channel.BasicConsume(queueName, true, consumer);
+                    //Console.ReadLine();
+                }
+            }
+        }
+        #endregion
         #region subcribe
         static void subcribepublish()
         {
-            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            var factory = new ConnectionFactory { Uri = _url };
             using (var connection = factory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
@@ -205,7 +322,7 @@ namespace RabbitMQDemo
         }
         static void subcribereceive()
         {
-            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            var factory = new ConnectionFactory { Uri = _url };
             using (var connection = factory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
@@ -242,7 +359,7 @@ namespace RabbitMQDemo
         #region high
         static void highpublish()
         {
-            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            var factory = new ConnectionFactory { Uri = _url };
             using (var connection = factory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
@@ -270,7 +387,7 @@ namespace RabbitMQDemo
         }
         static void highreceive()
         {
-            var factory = new ConnectionFactory { Uri = ConfigurationManager.AppSettings["RabbitMQUri"] };
+            var factory = new ConnectionFactory { Uri = _url };
             using (var connection = factory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())

@@ -1,5 +1,7 @@
 
 
+2018-07-23 Nkit.Core	- object<->bytes
+2018-07-19 RabbitMQDemo - TTL subscribe demo
 2018-07-10 RabbitMQDemo - TTL demo
 2018-06-25 Nkit.Redis	- thread.Abort
 2018-06-22 Nkit.Db.Ado	- ado.net include:msSql|Oracle|OleDB|SQLite
