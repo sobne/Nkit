@@ -3,6 +3,7 @@ using Nkit.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 
@@ -86,6 +87,18 @@ namespace ConsoleApp
             var tsB = (TestStructure)Convertor.Bytes2Object(bytTemp, typeof(TestStructure));
             Console.WriteLine(tsB.ToString());
 
+            var b = new macbook
+            {
+                name = "mac10",
+                price = 10000
+            };
+            var buff = Convertor.Object2Bytes(b);
+            var o = (book)Convertor.Bytes2Object(buff, typeof(book));
+
+            var buff2 = Convertor.ObjectToBytes(b);
+            var obj = Convertor.BytesToObject(buff2);
+
+
             Console.ReadLine();
         }
     }
@@ -96,9 +109,17 @@ namespace ConsoleApp
             return id + ":test";
         }
     }
+    [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
     class book
     {
         public string name { get; set; }
+    }
+    [StructLayout(LayoutKind.Sequential)]
+    [Serializable]
+    class macbook:book
+    {
+        public double price { get; set; }
     }
 
 

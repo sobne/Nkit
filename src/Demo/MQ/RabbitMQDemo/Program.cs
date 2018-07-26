@@ -220,7 +220,7 @@ namespace RabbitMQDemo
 
                         IBasicProperties props = channel.CreateBasicProperties();
                         props.DeliveryMode = 2;
-                        props.Expiration = "10000";
+                        props.Expiration = "120000";
 
 
                         channel.BasicPublish(exchange, routingKey, props, body);
@@ -230,65 +230,97 @@ namespace RabbitMQDemo
                 }
             }
         }
+        static Dictionary<string, Tuple<string, IModel>> _dicCH = new Dictionary<string, Tuple<string, IModel>>();
         static void subcribeconsumer()
         {
             string exchange = string.Format("Ex{0}.sc", _appID);
             var routingKey = "*.rabbit";
 
             var factory = new ConnectionFactory { Uri = _url };
-            using (var connection = factory.CreateConnection())
+            var connection = factory.CreateConnection();
+            
+            for (int i = 0; i < 5; i++)
             {
-                using (var channel = connection.CreateModel())
+                var channel = connection.CreateModel();
+                channel.ExchangeDeclare(exchange, "topic");
+                var queueName = channel.QueueDeclare().QueueName;
+
+                channel.QueueBind(queueName, exchange, routingKey);
+
+                _dicCH.Add("get" + i, new Tuple<string, IModel>(queueName, channel));
+            }
+
+            Console.WriteLine("get[0-4]已经订阅消息>>>");
+
+            Console.WriteLine("输入get[0-4]获取消息");
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (input.ToLower() == "quit")
                 {
-
-                    channel.ExchangeDeclare(exchange, "topic");
-                    var queueName = channel.QueueDeclare().QueueName;
-
-                    channel.QueueBind(queueName, exchange, routingKey);
-                    
-                    Console.WriteLine("准备接收消息>>>");
-
-                    Console.WriteLine("输入get获取消息");
+                    connection.Close();
+                    return;
+                }
+                else if (input.ToLower().StartsWith("get"))
+                {
                     while (true)
                     {
-                        string input = Console.ReadLine();
-                        if (input.ToLower() == "quit")
+                        var bgr = _dicCH[input].Item2.BasicGet(_dicCH[input].Item1, true);
+                        if (bgr == null)
                         {
-                            return;
+                            writeLine("没有消息");
+                            break;
                         }
-                        else if (input.ToLower() == "get")
+                        else
                         {
-                            while (true)
-                            {
-                                var bgr = channel.BasicGet(queueName, true);
-                                if (bgr == null)
-                                {
-                                    writeLine("没有消息");
-                                    break;
-                                }
-                                else
-                                {
-                                    var message = Encoding.UTF8.GetString(bgr.Body);
-                                    writeLine(string.Format("接收消息-总数[{0}] - {1}", bgr.MessageCount, message));
-                                }
-                                Thread.Sleep(20);
-                            }
-
+                            var message = Encoding.UTF8.GetString(bgr.Body);
+                            writeLine(string.Format("接收消息-总数[{0}] - {1}", bgr.MessageCount, message));
                         }
+                        Thread.Sleep(20);
                     }
 
-
-                    //var consumer = new EventingBasicConsumer(channel);
-
-                    //consumer.Received += (s, e) =>
-                    //{
-                    //    var message = Encoding.UTF8.GetString(e.Body);
-                    //    Console.WriteLine("接收到的消息： '{0}':'{1}'", e.RoutingKey, message);
-                    //};
-                    //channel.BasicConsume(queueName, true, consumer);
-                    //Console.ReadLine();
                 }
             }
+                //using (var channel = connection.CreateModel())
+                //{
+
+                //    channel.ExchangeDeclare(exchange, "topic");
+                //    var queueName = channel.QueueDeclare().QueueName;
+
+                //    channel.QueueBind(queueName, exchange, routingKey);
+
+                //    Console.WriteLine("准备接收消息>>>");
+
+                //    Console.WriteLine("输入get获取消息");
+                //    while (true)
+                //    {
+                //        string input = Console.ReadLine();
+                //        if (input.ToLower() == "quit")
+                //        {
+                //            return;
+                //        }
+                //        else if (input.ToLower() == "get")
+                //        {
+                //            while (true)
+                //            {
+                //                var bgr = channel.BasicGet(queueName, true);
+                //                if (bgr == null)
+                //                {
+                //                    writeLine("没有消息");
+                //                    break;
+                //                }
+                //                else
+                //                {
+                //                    var message = Encoding.UTF8.GetString(bgr.Body);
+                //                    writeLine(string.Format("接收消息-总数[{0}] - {1}", bgr.MessageCount, message));
+                //                }
+                //                Thread.Sleep(20);
+                //            }
+
+                //        }
+                //    }
+                //}
+            
         }
         #endregion
         #region subcribe
