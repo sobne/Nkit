@@ -49,6 +49,32 @@ process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
 
 
 ---------------------------------------------------------------------------------------
+WSDL
+Setting environment for using Microsoft Visual Studio 2008 x86 tools.
+
+D:\Program Files (x86)\Microsoft Visual Studio 9.0\VC>wsdl /l:cs /out:D:\Messages.cs http://localhost:8091/Messages.asmx?wsdl
+Microsoft(R) Web Services 描述语言实用工具
+[Microsoft (R) .NET Framework, Version 2.0.50727.3038]
+Copyright (C) Microsoft Corporation. All rights reserved.
+正在写入文件“D:\Messages.cs”。
+
+D:\Program Files (x86)\Microsoft Visual Studio 9.0\VC>
 
 
+----------------------------------------------------------------------------------------
+Microsoft Windows [版本 10.0.14393]
+(c) 2016 Microsoft Corporation。保留所有权利。
 
+C:\Users\Administrator>cd/d C:\Windows\Microsoft.NET\Framework64\v4.0.30319
+
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319>aspnet_regiis -i
+Microsoft (R) ASP.NET RegIIS 版本 4.0.30319.0
+用于在本地计算机上安装和卸载 ASP.NET 的管理实用工具。
+版权所有(C) Microsoft Corporation。保留所有权利。
+开始安装 ASP.NET (4.0.30319.0)。
+此操作系统版本不支持此选项。管理员应使用“打开或关闭 Windows 功能”对话框、“服务器管理器”管理工具或 dism.exe 命令行工
+具安装/卸载包含 IIS8 的 ASP.NET 4.5。有关更多详细信息，请参见 http://go.microsoft.com/fwlink/?LinkID=216771。243077
+ASP.NET (4.0.30319.0)安装完毕。
+
+准备ISO, source/sfx
+“服务器管理器”管理工具->添加角色功能->web服务->选择路径...

@@ -4,6 +4,7 @@ var Name = MemCache.GetItem<string>(key,
                 new TimeSpan(0, 10, 0));
 */
 using System;
+using System.Data.SqlClient;
 using System.Runtime.Caching;
 
 namespace Nkit.Data
@@ -77,6 +78,58 @@ namespace Nkit.Data
             {
                 throw;
             }
+        }
+        static public void Remove(string key)
+        {
+            try
+            {
+                MemoryCache.Default.Remove(key);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        static public bool IsInMaintenanceMode()
+        {
+            bool inMaintenanceMode;
+
+            if (MemoryCache.Default["MaintenanceMode"] == null)
+            {
+                CacheItemPolicy policy = new CacheItemPolicy();
+
+                string connStr = "DB CONNECTION STRING";
+
+                SqlDependency.Start(connStr);
+
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    using (SqlCommand command = new SqlCommand("Select MaintenanceMode From dbo.MaintenanceMode", conn))
+                    {
+                        command.Notification = null;
+
+                        SqlDependency dep = new SqlDependency();
+
+                        dep.AddCommandDependency(command);
+
+                        conn.Open();
+
+                        inMaintenanceMode = (bool)command.ExecuteScalar();
+
+                        SqlChangeMonitor monitor = new SqlChangeMonitor(dep);
+
+                        policy.ChangeMonitors.Add(monitor);
+                    }
+                }
+
+                MemoryCache.Default.Add("MaintenanceMode", inMaintenanceMode, policy);
+            }
+            else
+            {
+                inMaintenanceMode = (bool)MemoryCache.Default.Get("MaintenanceMode");
+            }
+
+            return inMaintenanceMode;
         }
     }
 }
