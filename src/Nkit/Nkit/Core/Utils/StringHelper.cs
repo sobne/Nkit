@@ -15,7 +15,7 @@ namespace Nkit.Core.Utils
         /// </summary>
         /// <param name="s">要计算长度的字符串</param>
         /// <returns></returns>
-        public static Int32 getByteCount(String s)
+        public static Int32 GetByteCount(String s)
         {
             return Encoding.Default.GetByteCount(s.ToCharArray());
         }
@@ -24,7 +24,7 @@ namespace Nkit.Core.Utils
         /// </summary>
         /// <param name="str">要计算长度的字符串</param>
         /// <returns></returns>
-        public static int getStringLen(string str)
+        public static int GetStringLen(string str)
         {
             return Encoding.Default.GetBytes(str).Length;
         }
@@ -34,7 +34,7 @@ namespace Nkit.Core.Utils
         /// <param name="in_str">要截取的字符串</param>
         /// <param name="short_len">截取长度</param>
         /// <returns>返回截取后的字符串</returns>
-        public string getShort(string in_str, int short_len)
+        public string GetShort(string in_str, int short_len)
         {
             string _str = in_str;
             int idx = 0;
@@ -76,7 +76,7 @@ namespace Nkit.Core.Utils
         /// <param name="sourceString"></param>
         /// <param name="byteLength"></param>
         /// <returns></returns>
-        public static string cutString(string sourceString, int byteLength)
+        public static string CutString(string sourceString, int byteLength)
         {
             StringBuilder sb = new StringBuilder();
             Int32 byteCount = 0;
@@ -289,13 +289,13 @@ namespace Nkit.Core.Utils
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string getSpells(string input)
+        public static string GetSpells(string input)
         {
             int len = input.Length;
             string reVal = "";
             for (int i = 0; i < len; i++)
             {
-                reVal += getSpell(input.Substring(i, 1));
+                reVal += GetSpell(input.Substring(i, 1));
             }
             return reVal;
         }
@@ -304,7 +304,7 @@ namespace Nkit.Core.Utils
         /// </summary>
         /// <param name="cn"></param>
         /// <returns></returns>
-        public static string getSpell(string cn)
+        public static string GetSpell(string cn)
         {
             byte[] arrCN = Encoding.Default.GetBytes(cn);
             if (arrCN.Length > 1)

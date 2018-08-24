@@ -14,8 +14,8 @@ namespace ConsoleApp
         static void Main(string[] args)
         {
             //log();
-            //testCache();
-            testConvertor();
+            testCache();
+            //testConvertor();
             Console.ReadLine();
         }
         static void log()
@@ -36,6 +36,15 @@ namespace ConsoleApp
         }
         static void testCache()
         {
+
+            MemCache.Set<string>("noexpiration", "noexpiration-noexpiration-noexpiration-noexpiration");
+            var a0 = MemCache.Get<string>("noexpiration");
+            MemCache.Set<string>("testabsolutetime", "sdfaslfjasldfjadsfjsafsfsd", DateTime.Now.AddSeconds(3));
+            var a1 = MemCache.Get<string>("testabsolutetime");
+            Thread.Sleep(4000);
+            var a2 = MemCache.Get<string>("testabsolutetime");
+            a0 = MemCache.Get<string>("noexpiration");
+
             MemCache.Set<string>("test123", "sdfaslfjasldfjadsfjsafsfsd", new TimeSpan(0, 0, 5));
             var v1 = MemCache.Get<string>("test123");
             var v2 = MemCache.Get<string>("test123");

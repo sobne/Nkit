@@ -29,7 +29,13 @@ namespace RedisApp
             //redis.Set("1212:bca", data);
             //var v=redis.Get<string>("1212:bca");
             //Console.WriteLine(v);
-            
+
+            RedisClient.Set("clienttest", "clienttest,clienttest-clienttest-clienttest");
+            var clienttest = RedisClient.Get<string>("clienttest");
+
+            Console.ReadLine();
+            RedisClient.Del("clienttest");
+
             var ts = new TimeSpan(0, 5, 0);
             RedisClient.Set("clienttest", "clienttest,sdfsfsfdsf", ts);
             for (int j = 0; j < 20; j++)
@@ -39,7 +45,14 @@ namespace RedisApp
                 var v = RedisClient.Get<string>("test" + j);
                 Console.WriteLine(j+" - "+v);
             }
-            
+            var key = "absolutetime";
+            RedisClient.Set(key, "clienttest,absolutetime", DateTime.Now.AddSeconds(3));
+            var a0 = RedisClient.Get<string>(key);
+            Console.WriteLine("a0:" + a0);
+            Thread.Sleep(4000);
+            a0 = RedisClient.Get<string>(key);
+            Console.WriteLine("a0:" + a0);
+
             Console.ReadLine();
         }
     }

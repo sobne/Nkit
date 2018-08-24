@@ -80,24 +80,51 @@ namespace Nkit.Redis.StackExchange
         }
 
         #region string
-
-        public bool Set<T>(string key, T obj, TimeSpan? expiry = default(TimeSpan?))
+        public bool Del(string key)
+        {
+            return Db.KeyDelete(key);
+        }
+        public bool Set<T>(string key, T obj)
         {
             //string json = JsonHelper.Serialize<T>(obj);
             string json = JsonConvert.SerializeObject(obj);
+            return Db.StringSet(key, json);
+        }
+        public bool Set<T>(string key, T obj, TimeSpan expiry)
+        {
+            //if (expiry.HasValue) { }
+            string json = JsonConvert.SerializeObject(obj);
             return Db.StringSet(key, json, expiry);
         }
-        public T Get<T>(string key) where T : class
+        public bool Set<T>(string key, T obj, DateTime expiry)
         {
-            var str = Db.StringGet(key);
-            return string.IsNullOrEmpty(str) ? null : JsonConvert.DeserializeObject<T>(str);
-            //return string.IsNullOrEmpty(str) ? null : JsonHelper.DeSerialize<T>(str);
+            string json = JsonConvert.SerializeObject(obj);
+            var b = Db.StringSet(key, json);
+            if (b) return Db.KeyExpire(key, expiry);
+            return b;
         }
         public async Task<bool> SetAsync<T>(string key, T obj, TimeSpan? expiry = default(TimeSpan?))
         {
             //string json = JsonHelper.Serialize<T>(obj);
             string json = JsonConvert.SerializeObject(obj);
             return await Db.StringSetAsync(key, json, expiry);
+        }
+        public async Task<bool> SetAsync<T>(string key, T obj, DateTime? expiry = null)
+        {
+            //string json = JsonHelper.Serialize<T>(obj);
+            string json = JsonConvert.SerializeObject(obj);
+            var b = await Db.StringSetAsync(key, json);
+            if (b && expiry != null)
+            {
+                return await Db.KeyExpireAsync(key, expiry);
+            }
+            return b;
+        }
+        public T Get<T>(string key) where T : class
+        {
+            var str = Db.StringGet(key);
+            return string.IsNullOrEmpty(str) ? null : JsonConvert.DeserializeObject<T>(str);
+            //return string.IsNullOrEmpty(str) ? null : JsonHelper.DeSerialize<T>(str);
         }
         public async Task<T> GetAsync<T>(string key) where T : class
         {

@@ -29,7 +29,21 @@ namespace Utils
                 return null;
             }
         }
-        static public bool Set<T>(string key, T obj, TimeSpan? expiry = default(TimeSpan?))
+        static public bool Set<T>(string key, T obj)
+        {
+            try
+            {
+                //if (redis == null) redis = new RedisSe(host, index);
+                if (!redis.Connected) return false;
+                else return redis.Set<T>(key, obj);
+            }
+            catch
+            {
+                //log
+                return false;
+            }
+        }
+        static public bool Set<T>(string key, T obj, TimeSpan expiry)
         {
             try
             {
@@ -43,10 +57,33 @@ namespace Utils
                 return false;
             }
         }
-        static public bool Delete(string key)
+        static public bool Set<T>(string key, T obj, DateTime expiry)
         {
-            return false;
-            //RedisSe redis = new RedisSe(host, index);
+            try
+            {
+                //if (redis == null) redis = new RedisSe(host, index);
+                if (!redis.Connected) return false;
+                else return redis.Set<T>(key, obj, expiry);
+            }
+            catch
+            {
+                //log
+                return false;
+            }
+        }
+        static public bool Del(string key)
+        {
+            try
+            {
+                //if (redis == null) redis = new RedisSe(host, index);
+                if (!redis.Connected) return false;
+                else return redis.Del(key);
+            }
+            catch
+            {
+                //log
+                return false;
+            }
             //return redis.Db.KeyDelete()
         }
     }

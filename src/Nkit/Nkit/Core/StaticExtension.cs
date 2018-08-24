@@ -312,6 +312,32 @@ namespace Nkit.Core
         }
         #endregion
 
+
+        public static IList<T> GetPager<T>(this List<T> list, int page, int pagesize)
+        {
+            IList<T> targetList = new List<T>();
+            for (var i = 0; i < list.Count; i++)
+            {
+                if (i >= (page - 1) * pagesize && i < page * pagesize)
+                {
+                    targetList.Add(list[i]);
+                }
+            }
+            return targetList;
+        }
+        public static DataTable GetPager(this DataTable datatable, int page, int pagesize)
+        {
+            var dt = datatable.Clone();
+            for (var i = 0; i < datatable.Rows.Count; i++)
+            {
+                if (i >= (page - 1) * pagesize && i < page * pagesize)
+                {
+                    dt.Rows.Add(datatable.Rows[i].ItemArray);
+                }
+            }
+            return dt;
+        }
+
         #region Regex
         /// <summary>
         /// 指示所指定的正则表达式在指定的输入字符串中是否找到了匹配项。
