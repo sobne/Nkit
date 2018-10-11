@@ -47,7 +47,7 @@ namespace WinServ
         }
         protected override void OnStart(string[] args)
         {
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter("C:\\log.txt", true))
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true))
             {
                 sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Start.");
             }
@@ -64,7 +64,7 @@ namespace WinServ
 
         protected override void OnStop()
         {
-            using (System.IO.StreamWriter sw = new System.IO.StreamWriter("C:\\log.txt", true))
+            using (System.IO.StreamWriter sw = new System.IO.StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "log.txt", true))
             {
                 sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss ") + "Stop.");
             }

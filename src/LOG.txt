@@ -1,5 +1,6 @@
 
-
+2018-10-11 Demo		- UdpClientTest-ConsoleCtrlDelegate
+2018-09-12 Nkit.Core	- GetEnumDescription
 2018-08-24 Nkit.Redis	- add absoluteExpiration
 2018-08-10 Nkit.Core	- getpager(list,datatable)
 2018-08-02 Nkit.RabbitMq- library,connection manager

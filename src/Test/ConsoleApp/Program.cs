@@ -13,10 +13,31 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            listtest();
             //log();
-            testCache();
+            //testCache();
             //testConvertor();
             Console.ReadLine();
+        }
+        static void listtest()
+        {
+            var Keys = new List<string>
+            {
+                "111",
+                "111222",
+                "333",
+                "333444",
+                "444",
+                "444555"
+            };
+            var key = "3331";
+            var keys = Keys.Where(x => x.Contains(key)).ToList();
+
+            foreach (var k in keys)
+            {
+                Keys.Remove(k);
+            }
+
         }
         static void log()
         {

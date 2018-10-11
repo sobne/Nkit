@@ -29,6 +29,19 @@ namespace Nkit.Core
     /// </summary>
     public static class StaticExtension
     {
+
+        #region Enum
+        /// <summary>
+        /// 获取Enum的描述信息
+        /// </summary>
+        /// <param name="enum"></param>
+        /// <returns></returns>
+        public static string GetDescription(this Enum @enum)
+        {
+            return Base.GetEnumDescription(@enum);
+        }
+        #endregion
+
         #region object
         public static string ToString(this object obj, string defaultValue)
         {

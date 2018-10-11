@@ -1,12 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Nkit.Core
 {
     public class Base
     {
+        /// <summary>
+        /// 获取Enum描述信息
+        /// </summary>
+        /// <param name="enum"></param>
+        /// <returns></returns>
+        public static string GetEnumDescription(Enum @enum)
+        {
+            var type = @enum.GetType();
+            var memberInfos = type.GetMember(@enum.ToString());
+            if (memberInfos != null && memberInfos.Length > 0)
+            {
+                if (memberInfos[0].GetCustomAttributes(typeof(DescriptionAttribute), false) is DescriptionAttribute[] attrs && attrs.Length > 0)
+                {
+                    return attrs[0].Description;
+                }
+            }
+            return @enum.ToString();
+        }
         /// <summary>
         /// 比较大小,使用范型,返回较大的那个数
         /// </summary>
