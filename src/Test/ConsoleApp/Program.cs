@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace ConsoleApp
@@ -13,11 +14,27 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            listtest();
+            regexMatch();
+
+            //listtest();
             //log();
             //testCache();
             //testConvertor();
             Console.ReadLine();
+        }
+        static void regexMatch()
+        {
+            var stringMatch = @"^\d{9,13}$";
+            while (true)
+            {
+                var input = Console.ReadLine();
+                if (input.ToLower() == "exit")
+                {
+                    break;
+                }
+                Console.WriteLine(Regex.IsMatch(input, stringMatch) ? "true" : "false");
+            }
+                
         }
         static void listtest()
         {
