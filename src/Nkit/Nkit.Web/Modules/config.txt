@@ -1,0 +1,13 @@
+  <system.web>
+    <compilation debug="true" targetFramework="4.6.2"/>
+    <httpRuntime targetFramework="4.6.1"/>
+    <httpModules>
+      <add name="WebServiceVerifyModule" type="WebDemo.App_Code.WebServiceVerifyModule"/>
+    </httpModules>
+  </system.web>
+  <system.webServer>
+    <modules>
+      <add name="WebServiceVerifyModule" type="WebDemo.App_Code.WebServiceVerifyModule"/>
+    </modules>
+    <validation validateIntegratedModeConfiguration="false" />
+  </system.webServer>

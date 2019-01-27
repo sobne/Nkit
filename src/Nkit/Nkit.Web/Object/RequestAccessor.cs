@@ -301,6 +301,17 @@ namespace Nkit.Web.Object
             return str;
         }
         /// <summary>
+        /// 获取IP
+        /// </summary>
+        /// <returns></returns>
+        public static string GetIP()
+        {
+            if (request.ServerVariables["HTTP_VIA"] != null)
+                return request.ServerVariables["HTTP_X_FORWARDED_FOR"].Split(new char[] { ',' })[0];
+            else
+                return request.ServerVariables["REMOTE_ADDR"];
+        }
+        /// <summary>
         /// 保存Request文件
         /// </summary>
         /// <param name="path">保存到文件名</param>
@@ -329,5 +340,6 @@ namespace Nkit.Web.Object
             return bc.Type;
         }
         #endregion
+		
     }
 }
