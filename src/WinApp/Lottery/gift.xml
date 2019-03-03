@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<list>
+  <info id="0">
+    <name>一等奖</name>
+    <number>1</number>
+    <numberpertime>1</numberpertime>
+    <pic>\gift\1.jpg</pic>
+    <description></description>
+    <title>一等奖</title>
+    <level>1</level>
+  </info>
+  <info id="1">
+    <name>二等奖</name>
+    <number>2</number>
+    <numberpertime>1</numberpertime>
+    <pic>\gift\2.jpg</pic>
+    <description></description>
+    <title>二等奖</title>
+    <level>2</level>
+  </info>
+  <info id="2">
+    <name>三等奖</name>
+    <number>3</number>
+    <numberpertime>2</numberpertime>
+    <pic>\gift\3.jpg</pic>
+    <description></description>
+    <title>三等奖</title>
+    <level>3</level>
+  </info>
+  <info id="3">
+    <name>纪念奖</name>
+    <number>6</number>
+    <numberpertime>3</numberpertime>
+    <pic>\gift\3.jpg</pic>
+    <description></description>
+    <title>纪念奖</title>
+    <level>4</level>
+  </info>
+</list>

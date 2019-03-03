@@ -1,4 +1,7 @@
 
+2019-02-25 Lottery		- add: timer function, gift win
+2019-02-21 Lottery		- lottery app
+2019-01-27 Demo		- httpModules
 2018-10-11 Demo		- UdpClientTest-ConsoleCtrlDelegate
 2018-09-12 Nkit.Core	- GetEnumDescription
 2018-08-24 Nkit.Redis	- add absoluteExpiration

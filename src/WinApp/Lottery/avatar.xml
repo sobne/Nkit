@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<list>
+<info id="1"><name>name1</name><department>dep1</department><pic>\avatar\1.jpg</pic><remark></remark></info>
+<info id="2"><name>name2</name><department>dep1</department><pic>\avatar\2.jpg</pic><remark></remark></info>
+<info id="3"><name>name3</name><department>dep2</department><pic>\avatar\3.jpg</pic><remark></remark></info>
+<info id="4"><name>name4</name><department>dep2</department><pic>\avatar\4.jpg</pic><remark></remark></info>
+<info id="5"><name>name5</name><department>dep3</department><pic>\avatar\5.jpg</pic><remark></remark></info>
+<info id="6"><name>name6</name><department>dep3</department><pic>\avatar\6.jpg</pic><remark></remark></info>
+<info id="7"><name>name7</name><department>dep4</department><pic>\avatar\7.jpg</pic><remark></remark></info>
+</list>

@@ -1,0 +1,32 @@
+# \mysql server\my.ini
+[mysqld]
+# enable event_schedule
+event_scheduler=1
+
+# sql
+set global event_scheduler=1;
+
+
+
+--------------------------------------------------------------------------------
+
+
+drop event if exists event_delete_records;
+CREATE EVENT `event_delete_records` ON SCHEDULE EVERY 6 MONTH 
+STARTS '2019-02-14 13:00:00'
+ON COMPLETION PRESERVE ENABLE COMMENT 'delete records which 6m ago in history' DO 
+CALL proc_delete_records();
+
+--双击-打开-保存一哈
+
+DROP PROCEDURE IF EXISTS `proc_delete_records`;
+DELIMITER;;
+CREATE PROCEDURE proc_delete_records()
+begin
+delete from table_history where createtime < date_sub(CURRENT_TIMESTAMP,INTERVAL 6 MONTH);
+end
+;;
+DELIMITER;
+
+
+--------------------------------------------------------------------------------
