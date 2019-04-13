@@ -34,6 +34,8 @@
             this.txtAscii = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtHex = new System.Windows.Forms.TextBox();
+            this.txtBin = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -87,11 +89,30 @@
             this.txtHex.TabIndex = 1;
             this.txtHex.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtHex_KeyUp);
             // 
+            // txtBin
+            // 
+            this.txtBin.Location = new System.Drawing.Point(60, 120);
+            this.txtBin.Name = "txtBin";
+            this.txtBin.Size = new System.Drawing.Size(325, 21);
+            this.txtBin.TabIndex = 3;
+            this.txtBin.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtBin_KeyUp);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(13, 123);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(23, 12);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "bin";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(428, 136);
+            this.ClientSize = new System.Drawing.Size(428, 168);
+            this.Controls.Add(this.txtBin);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtHex);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtAscii);
@@ -113,6 +134,8 @@
         private System.Windows.Forms.TextBox txtAscii;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtHex;
+        private System.Windows.Forms.TextBox txtBin;
+        private System.Windows.Forms.Label label4;
     }
 }
 

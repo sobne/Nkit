@@ -75,12 +75,32 @@ namespace Nkit.Core.Utils
         {
             if (ClosedConsole != null)
             {
+                switch (ctrlType)
+                {
+                    case CtrlCEvent: Console.WriteLine("Ctrl+C keydown"); break;
+
+                    case CtrlBreakEvent: Console.WriteLine("Ctrl+Break keydown"); break;
+
+                    case CtrlCloseEvent: Console.WriteLine("window closed"); break;
+
+                    case CtrlLogoffEvent: Console.WriteLine("log off or shut down"); break;
+
+                    case CtrlShutdownEvent: Console.WriteLine("system shut down"); break;
+
+                    default: Console.WriteLine(ctrlType.ToString()); break;
+                }
                 var e = new CloseConsoleEventArgs((CloseConsoleCategory)ctrlType);
                 ClosedConsole("Console", e);
                 return e.IsCancel;
             }
             return false; //忽略处理，让系统进行默认操作
         }
+
+        private const int CtrlCEvent = 0;//CTRL_C_EVENT = 0;//一个Ctrl+C的信号被接收，该信号或来自键盘，或来自GenerateConsoleCtrlEvent    函数   
+        private const int CtrlBreakEvent = 1;//CTRL_BREAK_EVENT = 1;//一个Ctrl+Break信号被接收，该信号或来自键盘，或来自GenerateConsoleCtrlEvent    函数  
+        private const int CtrlCloseEvent = 2;//CTRL_CLOSE_EVENT = 2;//当用户系统关闭Console时，系统会发送此信号到此   
+        private const int CtrlLogoffEvent = 5;//CTRL_LOGOFF_EVENT = 5;//当用户退出系统时系统会发送这个信号给所有的Console程序。该信号不能显示是哪个用户退出。   
+        private const int CtrlShutdownEvent = 6;//CTRL_SHUTDOWN_EVENT = 6;//当系统将要关闭时会发送此信号到所有Console程序
 
         #endregion
     }

@@ -60,6 +60,7 @@
     <Compile Include="Core\Base.cs" />
     <Compile Include="Core\Utils\ConsoleUtil.cs" />
     <Compile Include="Core\Utils\DateHelper.cs" />
+    <Compile Include="Core\Utils\DllImportUtil.cs" />
     <Compile Include="Core\Utils\JsonHelper.cs" />
     <Compile Include="Data\MemCache.cs" />
     <Compile Include="Net\NetHelper.cs" />

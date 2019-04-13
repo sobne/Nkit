@@ -56,6 +56,20 @@ namespace CvtApp
             }
             
         }
+
+        private void txtBin_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtBin.Text)) return;
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
     public class BitConvertor
     {
