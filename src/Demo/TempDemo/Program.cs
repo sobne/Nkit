@@ -12,7 +12,8 @@ namespace TempDemo
     {
         static void Main(string[] args)
         {
-            test();
+            //test();
+            CheckCRC();
         }
         public delegate string AsyncMethodCaller(int callDuration, out int threadId);
         private static void callBackMethod(IAsyncResult ar)
@@ -48,6 +49,13 @@ namespace TempDemo
             }
             Console.WriteLine("等待异步方法TestMethodAsync执行完成");
             Console.Read();
+        }
+
+        static void CheckCRC()
+        {
+            var crc = "01032A000F00000000000000000000000000000000000000000000000000000000000000000000000000000000";
+            var res = CRC16.CheckCRC(crc);
+
         }
     }
 }

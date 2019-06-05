@@ -78,3 +78,10 @@ ASP.NET (4.0.30319.0)安装完毕。
 
 准备ISO, source/sfx
 “服务器管理器”管理工具->添加角色功能->web服务->选择路径...
+
+
+
+dism /online /enable-feature /featurename:IIS-ISAPIFilter
+dism /online /enable-feature /featurename:IIS-ISAPIExtensions
+dism /online /enable-feature /featurename:IIS-NetFxExtensibility45
+dism /online /enable-feature /featurename:IIS-ASPNET45

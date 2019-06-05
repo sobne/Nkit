@@ -1,4 +1,5 @@
 ﻿using Nkit.Core;
+using Nkit.Core.Utils;
 using Nkit.Data;
 using System;
 using System.Collections.Generic;
@@ -14,13 +15,19 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            regexMatch();
+            EL();
+            //regexMatch();
 
             //listtest();
             //log();
             //testCache();
             //testConvertor();
             Console.ReadLine();
+        }
+        static void EL()
+        {
+            //run as administrator
+            EventLogger.Information("test", "Nkit.EL", "test");
         }
         static void regexMatch()
         {

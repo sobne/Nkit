@@ -61,8 +61,10 @@
     <Compile Include="Core\Utils\ConsoleUtil.cs" />
     <Compile Include="Core\Utils\DateHelper.cs" />
     <Compile Include="Core\Utils\DllImportUtil.cs" />
+    <Compile Include="Core\Utils\EventLogger.cs" />
     <Compile Include="Core\Utils\JsonHelper.cs" />
     <Compile Include="Data\MemCache.cs" />
+    <Compile Include="Net\CustomerCredentials.cs" />
     <Compile Include="Net\NetHelper.cs" />
     <Compile Include="Net\Sockets\UdpUtils.cs" />
     <Compile Include="Net\WebRequest.cs" />

@@ -129,6 +129,20 @@ set @cmd ='select * from table1 where 1=1 '+@cond
 exec (@cmd)
 
 
+-----------
+declare @count int =0
+declare @name nvarchar(60)=''
+DECLARE cur_temp CURSOR FAST_FORWARD READ_ONLY FOR
+select 'name',1
+OPEN cur_temp
+FETCH NEXT FROM cur_temp INTO @name,@count
+WHILE @@FETCH_STATUS = 0
+begin
+	print @name
+	FETCH NEXT FROM cur_temp INTO @name, @count
+end
+CLOSE cur_temp
+DEALLOCATE cur_temp
 
 
 
@@ -190,3 +204,74 @@ exec sp_dropserver  'ITSV', 'droplogins'
 select * from ITSV.master.dbo.table1 
 
 ---------------------------------------------------------------------------------------
+
+
+select top 10 * 
+from (select row_number() 
+over(order by ID desc) as rownumber,* 
+from table1) temp_row
+where rownumber>10
+
+
+-----------------------------------------------------------------------------------------
+Common_PageList 'tb_BagStatus','*','1=1','1','20','LastTime desc','1'
+CREATE PROC [dbo].[Common_PageList]
+(
+@tab nvarchar(max),---表名
+@strFld nvarchar(max), --字段字符串
+@strWhere varchar(max), --where条件 
+@PageIndex int, --页码
+@PageSize int, --每页容纳的记录数
+@Sort VARCHAR(255), --排序字段及规则,不用加order by
+@IsGetCount bit  --是否得到记录总数，1为得到记录总数，0为不得到记录总数，返回记录集
+)
+AS
+declare @strSql nvarchar(max)
+set nocount on;
+if(@IsGetCount = 1)
+begin
+ set @strSql='SELECT COUNT(0) FROM ' + @tab + ' WHERE ' + @strWhere
+end
+else
+begin
+  set @strSql=' SELECT * FROM (SELECT ROW_NUMBER() 
+  OVER(ORDER BY ' + @Sort + ') AS rownum, ' + @strFld + ' FROM ' + @tab + ' where ' + @strWhere + ') AS Dwhere
+  WHERE rownum BETWEEN ' + CAST(((@PageIndex-1)*@PageSize + 1) as nvarchar(20)) + ' and ' + cast((@PageIndex*@PageSize) as nvarchar(20))
+end
+
+exec (@strSql)
+
+set nocount off;
+
+--------------------------------------------------------------------------------------------
+
+------------------------------
+其他信息:
+
+执行 Transact-SQL 语句或批处理时发生了异常。 (Microsoft.SqlServer.ConnectionInfo)
+
+------------------------------
+
+SQL Server 阻止了对组件“Agent XPs”的 过程“dbo.sp_get_sqlagent_properties”的访问，因为此组件已作为此服务器安全配置的一部分而被关闭。系统管理员可以通过使用 sp_configure 启用“Agent XPs”。有关启用“Agent XPs”的详细信息，请搜索 SQL Server 联机丛书中的“Agent XPs”。 (Microsoft SQL Server，错误: 15281)
+
+
+----方法:
+use [Master]
+go
+
+sp_configure 'show advanced options', 1;
+go
+reconfigure;
+go
+
+sp_configure 'Agent XPs', 1;
+go
+reconfigure;
+go
+
+-----
+services.msc -sqlserver agent- start
+
+
+
+----------------------------------------------------------------------------------------------
