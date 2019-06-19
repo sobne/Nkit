@@ -113,5 +113,38 @@ namespace Nkit.Core
                 return formatter.Deserialize(ms);
             }
         }
+
+        public static long Ip2Long(string ip)
+        {
+            long result = 0L;
+            var arr = ip.Split('.');
+            for (int i = 0; i < arr.Length; i++)
+            {
+                /**
+                 * 将每个元素左移（8*i）位，并将结果与前面已经算出的结果做或运算，ip的每
+                 * 三位数字都可以用八位二进制表示，将每三位左移（8*i）位后，会将数字向高
+                 * 位移动（8*i）位，低位会全部用0补足，与result做或运算后，低位将由result代替，
+                 * 最终将四个三位数字组成一个Long类型的整数
+                 */
+                result |= (long.Parse(arr[i]) << (8 * i));
+            }
+            return result;
+        }
+
+        public static string Long2Ip(long ip)
+        {
+            var sb = new StringBuilder();
+            for (int i = 0; i < 4; i++)
+            {
+                /**
+                 * 将Long整数右移（8*i）位，每次都会将待转化的数字移动到整个Long整数的低八位，
+                 * 然后将这个整数与（0xFF）做与运算，（0xFF）的低八位是1，剩余位全都为0，任何数与其做
+                 * 与运算都是低八位不变，高位变成0，这样就将每个三位数从Long整数中取出
+                 */
+                if (i < 3) sb.Append(((ip >> (8 * i)) & 0xff) + ".");
+                else sb.Append((ip >> (8 * i)) & 0xff);
+            }
+            return sb.ToString();
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Nkit
         /// </summary>
         /// <param name="FileName">文件名称(全路径)</param>
         /// <returns></returns>
-        public static string ReadFile(string FileName)
+        public static string Read(string FileName)
         {
             string str = string.Empty;
             if (!ExistsFile(FileName))
@@ -36,7 +36,7 @@ namespace Nkit
         /// </summary>
         /// <param name="FileName">文件名称(全路径)</param>
         /// <param name="content">内容</param>
-        public static void WriteFile(string FileName, string content)
+        public static void Write(string FileName, string content)
         {
             try
             {
@@ -49,6 +49,41 @@ namespace Nkit
             catch (Exception exception)
             {
                 throw exception;
+            }
+        }
+        private static object _locker = new object();
+        public static void Append(string fullFileName,string content)
+        {
+            try
+            {
+                lock (_locker)
+                {
+                    using (FileStream fs = new FileStream(fullFileName, FileMode.OpenOrCreate))
+                    {
+                        using (StreamWriter sw = new StreamWriter(fs))
+                        {
+                            sw.BaseStream.Seek(0, SeekOrigin.End);
+                            sw.WriteLine(content);
+                            sw.Flush();
+                            sw.Close();
+                        }
+                        fs.Close();
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
+        public static void Append(string fullFileName, string[] contents)
+        {
+            using (FileStream fs = new FileStream(fullFileName, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+            {
+                fs.Seek(fs.Length, SeekOrigin.Current);
+                string content = String.Join(Environment.NewLine, contents) + Environment.NewLine;
+                byte[] data = Encoding.UTF8.GetBytes(content);
+                fs.Write(data, 0, data.Length);
+                fs.Close();
             }
         }
         /// <summary>
@@ -64,7 +99,7 @@ namespace Nkit
             sr.Close();
             try
             {
-                delFile(FilePath);
+                DelFile(FilePath);
                 StreamWriter sw = File.CreateText(FilePath);
                 sw.Write(s_FileContent);
                 sw.Close();
@@ -80,7 +115,7 @@ namespace Nkit
         /// </summary>
         /// <param name="sSfile">要复制的文件</param>
         /// <param name="sDfile">目标路径</param>
-        public static void copyFile(string sSfile, string sDfile)
+        public static void CopyFile(string sSfile, string sDfile)
         {
             File.Copy(sSfile, sDfile);
         }
@@ -88,7 +123,7 @@ namespace Nkit
         /// 删除文件
         /// </summary>
         /// <param name="sPathFile">文件路径(物理路径)+名称</param>
-        public static void delFile(string sPathFile)
+        public static void DelFile(string sPathFile)
         {
             if (ExistsFile(sPathFile))
                 File.Delete(sPathFile);
@@ -130,6 +165,13 @@ namespace Nkit
                 {
                     throw;
                 }
+            }
+        }
+        public static void CreateFloder(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
             }
         }
         /// <summary>

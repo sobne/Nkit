@@ -16,7 +16,7 @@ namespace WinServ
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[] 
 			{ 
-				new ServiceTest() 
+				new ServiceAppDaemon() 
 			};
             ServiceBase.Run(ServicesToRun);
         }

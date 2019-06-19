@@ -64,6 +64,11 @@
     <Compile Include="Core\Utils\EventLogger.cs" />
     <Compile Include="Core\Utils\JsonHelper.cs" />
     <Compile Include="Data\MemCache.cs" />
+    <Compile Include="Log\ILogger.cs" />
+    <Compile Include="Log\ILoggerFactory.cs" />
+    <Compile Include="Log\Logger.cs" />
+    <Compile Include="Log\LoggerFactory.cs" />
+    <Compile Include="Log\LoggerUtil.cs" />
     <Compile Include="Net\CustomerCredentials.cs" />
     <Compile Include="Net\NetHelper.cs" />
     <Compile Include="Net\Sockets\UdpUtils.cs" />
@@ -81,7 +86,7 @@
     <Compile Include="Core\Expression\CopyRightExp.cs" />
     <Compile Include="Core\Expression\RegularExp.cs" />
     <Compile Include="IO\FileHelper.cs" />
-    <Compile Include="IO\LogH.cs" />
+    <Compile Include="Log\LogH.cs" />
     <Compile Include="Net\EmailUtils.cs" />
     <Compile Include="Net\FtpUtils.cs" />
     <Compile Include="Net\SocketUtils.cs" />
@@ -96,6 +101,7 @@
     <Compile Include="Security\Sha.cs" />
     <Compile Include="Security\Shift.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

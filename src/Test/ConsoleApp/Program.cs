@@ -1,6 +1,7 @@
 ﻿using Nkit.Core;
 using Nkit.Core.Utils;
 using Nkit.Data;
+using Nkit.Log;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,9 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            EL();
+            loger();
+            //ConvertIp();
+            //EL();
             //regexMatch();
 
             //listtest();
@@ -23,6 +26,29 @@ namespace ConsoleApp
             //testCache();
             //testConvertor();
             Console.ReadLine();
+        }
+        static void loger()
+        {
+            ILogger log = new LoggerFactory().GetLog();
+            log.Debug("112");
+            log.Error("112");
+            log.Fatal("112");
+            log.Info("112");
+            log.Warn("112");
+
+
+            ILogger log1 = new LoggerFactory().GetLog("test","APP");
+            log1.Debug("112");
+            log1.Error("112");
+            log1.Fatal("112");
+            log1.Info("112");
+            log1.Warn("112");
+        }
+        static void ConvertIp()
+        {
+            var l = Convertor.Ip2Long("192.168.1.5");
+            Console.WriteLine(l);
+            Console.WriteLine(Convertor.Long2Ip(l));
         }
         static void EL()
         {

@@ -1,6 +1,6 @@
 ﻿namespace WinServ
 {
-    partial class ServiceTest
+    partial class ServiceAppDaemon
     {
         /// <summary> 
         /// 必需的设计器变量。

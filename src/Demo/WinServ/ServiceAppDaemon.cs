@@ -13,12 +13,12 @@ using Nkit.IO;
 
 namespace WinServ
 {
-    public partial class ServiceTest : ServiceBase
+    public partial class ServiceAppDaemon : ServiceBase
     {
         private string[] _processAddress;
         private LogH _logH;
         
-        public ServiceTest()
+        public ServiceAppDaemon()
         {
             InitializeComponent();
 

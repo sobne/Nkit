@@ -1,4 +1,8 @@
 
+2019-06-19 Nkit		- Logger
+2019-06-18 Demo		- Winser,ServiceAppDaemon
+2019-06-16 Nkit		- add: long2ip
+2019-06-16 Nkit		- add: long2ip
 2019-06-05 Nkit.net		- add: eventlogger
 2019-03-20 Nkit.core	- add: dllImport module
 2019-02-25 Lottery		- add: timer function, gift win
@@ -8,15 +12,15 @@
 2018-09-12 Nkit.Core	- GetEnumDescription
 2018-08-24 Nkit.Redis	- add absoluteExpiration
 2018-08-10 Nkit.Core	- getpager(list,datatable)
-2018-08-02 Nkit.RabbitMq- library,connection manager
+2018-08-02 Nkit.RabbitMq	- library,connection manager
 2018-07-23 Nkit.Core	- object<->bytes
-2018-07-19 RabbitMQDemo - TTL subscribe demo
-2018-07-10 RabbitMQDemo - TTL demo
+2018-07-19 RabbitMQDemo 	- TTL subscribe demo
+2018-07-10 RabbitMQDemo 	- TTL demo
 2018-06-25 Nkit.Redis	- thread.Abort
 2018-06-22 Nkit.Db.Ado	- ado.net include:msSql|Oracle|OleDB|SQLite
 2018-06-11 Nkit.Redis	- auto reconnect
-2018-05-28 Queue 	- demo
+2018-05-28 Queue 		- demo
 2018-05-23 MemCache 	- utils & demo
 2018-05-22 Nkit.Redis 	- serialize using by Newtonsoft.Json
 
-2018-04-11 RabbitMQDemo - init
+2018-04-11 RabbitMQDemo 	- init

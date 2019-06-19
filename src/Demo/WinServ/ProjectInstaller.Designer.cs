@@ -39,7 +39,7 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.ServiceName = "ServiceTest";
+            this.serviceInstaller1.ServiceName = "ServiceAppDaemon";
             // 
             // ProjectInstaller
             // 

@@ -275,3 +275,16 @@ services.msc -sqlserver agent- start
 
 
 ----------------------------------------------------------------------------------------------
+
+declare @tablename nvarchar(100)
+SELECT [name] into #tablename FROM sysobjects WHERE type = 'U';
+while(select count(1) from #tablename)>0
+begin
+	select top 1 @tablename=[name] from #tablename;
+	exec('drop table '+@tablename);
+	delete from #tablename where [name]=@tablename;
+end
+Drop Table #tablename
+
+SELECT * FROM sysobjects WHERE (type = 'U') ORDER BY name
+----------------------------------------------------------------------------------------------
