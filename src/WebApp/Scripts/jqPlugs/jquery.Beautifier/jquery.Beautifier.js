@@ -1,5 +1,5 @@
 ;(function($, window, document,undefined) {
-    //定义Beautifier的构造函数
+    //constructor
     var Beautifier = function(ele, opt) {
         this.$element = ele,
         this.defaults = {
@@ -9,7 +9,7 @@
         },
         this.options = $.extend({}, this.defaults, opt)
     }
-    //定义Beautifier的方法
+    //function
     Beautifier.prototype = {
         beautify: function() {
             return this.$element.css({
@@ -19,7 +19,7 @@
             });
         }
     }
-    //在插件中使用Beautifier对象
+    //object
     $.fn.myPlugin = function(options) {
         //创建Beautifier的实体
         var beautifier = new Beautifier(this, options);

@@ -3,13 +3,13 @@
 ======================================================================================
 
 string connectStr = "Integrated Security=SSPI;initial catalog=test;data source=.\\SQLEXPRESS";
-string ConnectionStr="Data Source=10.101.1.1;Initial Catalog=test;User Id=sa;Password=****"
+string ConnectionStr="Data Source=127.0.0.1;Initial Catalog=test;User Id=sa;Password=****"
 
 using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=kcgl2015;User Id=sa;Password=sa;"))
 
 ---------------------------------------------------------------------------------------
 
-C:\Users\Administrator>sqlcmd -S 10.101.1.1 -U sa -P *****
+C:\Users\Administrator>sqlcmd -S 127.0.0.1 -U sa -P *****
 1> go
 1> use test
 2> go
