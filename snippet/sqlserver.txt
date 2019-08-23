@@ -213,6 +213,8 @@ from table1) temp_row
 where rownumber>10
 
 
+select * from table1 order by ID desc OFFSET 10 rows fetch next 10 rows only
+
 -----------------------------------------------------------------------------------------
 Common_PageList 'tb_BagStatus','*','1=1','1','20','LastTime desc','1'
 CREATE PROC [dbo].[Common_PageList]
@@ -243,7 +245,52 @@ exec (@strSql)
 
 set nocount off;
 
+------------------------------------------------------------
+
+--common_pagedtable 'table1' ,'*', 'PID=''abc1234''' , 2 , 10 , 'ID' ,0
+
+CREATE PROC [dbo].[Common_PagedTable]
+(
+@tablename nvarchar(max),---表名
+@fields nvarchar(max), --字段字符串
+@strWhere varchar(max), --where条件 
+@PageIndex int, --页码
+@PageSize int, --每页容纳的记录数
+@Sort VARCHAR(255), --排序字段及规则,不用加order by
+@IsGetCount bit  --是否得到记录总数，1为得到记录总数，0为不得到记录总数，返回记录集
+)
+AS
+declare @strSql nvarchar(max)
+set nocount on;
+if(@IsGetCount = 1)
+begin
+ set @strSql='SELECT COUNT(0) FROM ' + @tablename + ' WHERE ' + @strWhere
+end
+else
+begin
+
+  set @strSql='select ' + @fields + ' from ' + @tablename 
+  + ' where ' + @strWhere 
+  + ' order by ' + @Sort 
+  + ' offset '+CAST(((@PageIndex-1)*@PageSize) as nvarchar(20)) + ' rows fetch next '+cast(@PageSize as nvarchar(20))+' rows only'
+
+end
+
+--print(@strSql)
+exec (@strSql)
+set nocount off;
+GO
+
+
+
+
+
+
 --------------------------------------------------------------------------------------------
+
+
+
+
 
 ------------------------------
 其他信息:

@@ -10,8 +10,23 @@ git log
 git push -f
 --------------
 git revert -n ekt1fk86
-git add
+git add .
 git commit -m 'rever to ...'
 git log
 git push
 --------------
+git add /packages/*
+
+-------------
+git branch branch1
+git checkout branch1
+git add ./xxx/
+git commit - m 'xxx'
+git checkout master
+git merge branch1
+
+git branch -d[D] branch1
+
+git status
+git push -u origin master
+-------------

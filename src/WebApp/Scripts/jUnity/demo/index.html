@@ -8,9 +8,25 @@
     </body>
     <script type="text/javascript" src="../core/func.js"></script>
 	
+	<script type="text/javascript">
+		getLocalIP(function(ip){
+			alert(ip);
+		});
+		
+		var browerse=getBrowserInfo();
+		alert(browerse);
+	</script>
+	
+	
     <script type="text/javascript" src="../jUnity.js"></script>
     <script>
         console.log(jUnity.string.getLength("qwerta啊",false));
+		
+		console.log(jUnity.request.getBrowserInfo());
+		
+		jUnity.request.getLocalIP(function(ip){
+			console.log(ip);
+		});
     </script>
 
     <script type="text/javascript" src="../jUnityExtend.js"></script>

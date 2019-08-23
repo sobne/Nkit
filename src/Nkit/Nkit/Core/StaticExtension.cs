@@ -225,7 +225,53 @@ namespace Nkit.Core
             }
             return oblist;
         }
-        
+        private static List<T> TableToList<T>(this DataTable dt) where T : class, new()
+        {
+            Type t = typeof(T);
+            //获取当前Type的公共属性
+            PropertyInfo[] propertys = t.GetProperties();
+            List<T> list = new List<T>();
+            string typeName = string.Empty;
+            foreach (DataRow dr in dt.Rows)
+            {
+                T entity = new T();
+                foreach (PropertyInfo pi in propertys)
+                {
+                    typeName = pi.Name;
+                    if (dt.Columns.Contains(typeName))
+                    {
+                        //获取一个值,该值指定此属性是否可写 set 
+                        if (!pi.CanWrite) continue;
+                        object value = dr[typeName];
+                        if (value == DBNull.Value) continue;
+                        //获取此属性的类型是否是string类型
+                        if (pi.PropertyType == typeof(string))
+                        {
+                            //PropertyInfo.SetValue()三个参数
+                            //第一个 将设置其属性值的对象。
+                            //第二个 新的属性值。
+                            //第三个 索引化属性的可选索引值。 对于非索引化属性，该值应为 null。
+                            pi.SetValue(entity, value.ToString(), null);
+                        }
+                        else if (pi.PropertyType == typeof(int))
+                        {
+                            pi.SetValue(entity, int.Parse(value.ToString()), null);
+                        }
+                        else if (pi.PropertyType == typeof(DateTime))
+                        {
+                            pi.SetValue(entity, DateTime.Parse(value.ToString()), null);
+                        }
+                        else
+                        {
+                            pi.SetValue(entity, value, null);
+                        }
+                    }
+                }
+                list.Add(entity);
+            }
+            return list;
+        }
+
         /// <summary>
         /// 将字符串转换为list
         /// </summary>

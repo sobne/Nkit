@@ -56,7 +56,85 @@ var utils = {
             return utils.isArray(obj);
         }
     };
+	
 
+	//jUnity.cookie ==========================================================================
+    var document = win.document;
+    jUnity.cookie = jUnity.cookie ? jUnity.cookie : {
+        get: function (sKey) {
+            if (!sKey)
+                return "";
+            if (document.cookie.length > 0) {
+                var startIndex = document.cookie.indexOf(sKey + "=")
+                if (startIndex != -1) {
+                    startIndex = startIndex + sKey.length + 1
+                    var endIndex = document.cookie.indexOf(";", startIndex)
+                    if (endIndex == -1) {
+                        endIndex = document.cookie.length;
+                    }
+                    return decodeURIComponent(document.cookie.substring(startIndex, endIndex));
+                }
+            }
+            return ""
+        },
+        set: function (sKey, sValue, iExpireSeconds) {
+            if (!sKey)
+                return;
+            var expireDate = new Date();
+            expireDate.setTime(expireDate.getTime() + iExpireSeconds * 1000);
+            document.cookie = sKey + "=" + encodeURIComponent(sValue) +
+            ";expires=" + expireDate.toGMTString() + ";";
+        },
+        delete: function (sKey) {
+            if (!sKey)
+                return;
+            document.cookie = sKey + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+    };
+	
+	//jUnity.request ==========================================================================
+	jUnity.request = jUnity.request ? jUnity.request : {
+        getParameter: function (name) {
+            return getParameter(name);
+        },
+        getUrlParam: function (name) {
+            return getUrlParam(name);
+        },
+        getLocalIP: function (callback) {
+            getLocalIP(callback);
+        },
+		getBrowserInfo:function(){
+			getBrowserInfo();
+		}
+    };
+
+	//jUnity.string ==========================================================================
+    jUnity.string = jUnity.string ? jUnity.string : {
+        replaceURLWithHTMLLinks: function (sText, bBlank) {
+            return replaceURiWithHTMLLinks(sText, bBlank);
+        },
+        getLength: function (str, bChinese) {
+            return GetLengthOfStr(str, bChinese);
+        }
+    };
+
+	//jUnity.number ==========================================================================
+    jUnity.number = jUnity.number ? jUnity.number : {
+        accDiv: function (arg1,arg2) {
+            return accDiv(arg1, arg2);
+        },
+        accMul: function (arg1,arg2) {
+            return accDiv(arg1, arg2);
+        },
+		accAdd: function (arg1,arg2) {
+            return accDiv(arg1, arg2);
+        },
+		accSub: function (arg1,arg2) {
+            return accDiv(arg1, arg2);
+        }
+    };
+	
+	//jUnity.array ==========================================================================
     jUnity.array = jUnity.array ? jUnity.array : {
         distinct: function unique(arr) {
             var i = 0,
@@ -116,40 +194,8 @@ var utils = {
             return result;
         }
     };
-
-    var document = win.document;
-    jUnity.cookie = jUnity.cookie ? jUnity.cookie : {
-        get: function (sKey) {
-            if (!sKey)
-                return "";
-            if (document.cookie.length > 0) {
-                var startIndex = document.cookie.indexOf(sKey + "=")
-                if (startIndex != -1) {
-                    startIndex = startIndex + sKey.length + 1
-                    var endIndex = document.cookie.indexOf(";", startIndex)
-                    if (endIndex == -1) {
-                        endIndex = document.cookie.length;
-                    }
-                    return decodeURIComponent(document.cookie.substring(startIndex, endIndex));
-                }
-            }
-            return ""
-        },
-        set: function (sKey, sValue, iExpireSeconds) {
-            if (!sKey)
-                return;
-            var expireDate = new Date();
-            expireDate.setTime(expireDate.getTime() + iExpireSeconds * 1000);
-            document.cookie = sKey + "=" + encodeURIComponent(sValue) +
-            ";expires=" + expireDate.toGMTString() + ";";
-        },
-        delete: function (sKey) {
-            if (!sKey)
-                return;
-            document.cookie = sKey + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-        }
-    };
-
+	
+	//jUnity.date ==========================================================================
     jUnity.date = jUnity.date ? jUnity.date : {
         format: function (date, sFormat, sLanguage) {
             return formatDate(date, sFormat, sLanguage);
@@ -166,16 +212,10 @@ var utils = {
             return day + "天:" + hour + "小时:" + minute + "分钟:" + second + "秒";
         }
     };
-
-    jUnity.string = jUnity.string ? jUnity.string : {
-        replaceURLWithHTMLLinks: function (sText, bBlank) {
-            return replaceURiWithHTMLLinks(sText, bBlank);
-        },
-        getLength: function (str, bChinese) {
-            return GetLengthOfStr(str, bChinese);
-        }
-    };
-
+	
+	
+	
+	//..====================================================================================
     if (!win.jUnity) {
         win.jUnity = jUnity;
     }
