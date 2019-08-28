@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace Nkit.Core
 {
@@ -145,6 +146,26 @@ namespace Nkit.Core
                 else sb.Append((ip >> (8 * i)) & 0xff);
             }
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// 深度拷贝,新对象
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static T DeeperClone<T>(T obj)
+        {
+            T Ret = default(T);
+            if(obj!=null)
+            {
+                var ser = new XmlSerializer(typeof(T));
+                var stream = new MemoryStream();
+                ser.Serialize(stream, obj);
+                stream.Seek(0, SeekOrigin.Begin);
+                Ret = (T)ser.Deserialize(stream);
+            }
+            return Ret;
         }
     }
 }
