@@ -1,5 +1,6 @@
 
-2019-06-19 Nkit		- Logger
+2019-09-06 Winapp		- FormatTypeSetting & wpfdemo
+2019-06-19 Nkit		- Logger, JUnity
 2019-06-18 Demo		- Winser,ServiceAppDaemon
 2019-06-16 Nkit		- add: long2ip
 2019-06-16 Nkit		- add: long2ip
