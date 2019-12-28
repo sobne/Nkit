@@ -83,6 +83,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDemo", "Demo\WpfDemo\Wpf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormatType", "WinApp\FormatType\FormatType.csproj", "{13F98A4D-845F-4DC3-B1C1-4C02369DC655}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectCheckApp", "Demo\ConnectCheckApp\ConnectCheckApp.csproj", "{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -313,6 +315,14 @@ Global
 		{13F98A4D-845F-4DC3-B1C1-4C02369DC655}.Release|Any CPU.Build.0 = Release|Any CPU
 		{13F98A4D-845F-4DC3-B1C1-4C02369DC655}.Release|x86.ActiveCfg = Release|Any CPU
 		{13F98A4D-845F-4DC3-B1C1-4C02369DC655}.Release|x86.Build.0 = Release|Any CPU
+		{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}.Debug|x86.Build.0 = Debug|Any CPU
+		{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}.Release|x86.ActiveCfg = Release|Any CPU
+		{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -352,6 +362,7 @@ Global
 		{BFC85FDC-C861-4877-94D2-EFF0C25AA71E} = {63206A7C-B0C2-4EB7-8C4B-DBC357A17272}
 		{7D7FE3AD-0D75-4BEE-8B43-CE35AAB64EB5} = {38DDD108-FACA-4D27-A050-49E1B2C93B09}
 		{13F98A4D-845F-4DC3-B1C1-4C02369DC655} = {63206A7C-B0C2-4EB7-8C4B-DBC357A17272}
+		{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1} = {38DDD108-FACA-4D27-A050-49E1B2C93B09}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3D068818-047A-4D13-B697-5CD788510A9A}

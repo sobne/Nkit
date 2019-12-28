@@ -63,5 +63,24 @@ namespace Nkit.Data
         {
             return null;
         }
+        /// <summary>
+        /// DataTable转换为Dictionary, 用于DataTable不能ajax返回json的场景
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static List<Dictionary<string, object>> ToDictionary(DataTable dt)
+        {
+            var list = new List<Dictionary<string, object>>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                var result = new Dictionary<string, object>();
+                foreach (DataColumn dc in dt.Columns)
+                {
+                    result.Add(dc.ColumnName, dr[dc].ToString());
+                }
+                list.Add(result);
+            }
+            return list;
+        }
     }
 }

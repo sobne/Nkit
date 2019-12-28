@@ -9,13 +9,20 @@ namespace Nkit.Core.Utils
 {
     public class DllImportUtil
     {
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, ExactSpelling = true)]
+        public static extern IntPtr GetForegroundWindow();
+        [DllImport("user32.dll", EntryPoint = "SetForegroundWindow")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern int PostMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern int MoveWindow(IntPtr hWnd, int x, int y, int nWidth, int nHeight, bool BRePaint);
         #region 设置控制台标题 禁用关闭按钮
         [DllImport("user32.dll", EntryPoint = "FindWindow")]
-        extern static IntPtr FindWindow(string lpClassName, string lpWindowName);
+        public extern static IntPtr FindWindow(string lpClassName, string lpWindowName);
         [DllImport("user32.dll", EntryPoint = "GetSystemMenu")]
-        extern static IntPtr GetSystemMenu(IntPtr hWnd, IntPtr bRevert);
+        public extern static IntPtr GetSystemMenu(IntPtr hWnd, IntPtr bRevert);
         [DllImport("user32.dll", EntryPoint = "RemoveMenu")]
         extern static IntPtr RemoveMenu(IntPtr hMenu, uint uPosition, uint uFlags);
         #endregion

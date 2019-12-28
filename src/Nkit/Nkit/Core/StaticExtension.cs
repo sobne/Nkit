@@ -40,6 +40,10 @@ namespace Nkit.Core
         {
             return Base.GetEnumDescription(@enum);
         }
+        public static string GetDescription4Enum(this Enum @enum, Boolean nameInstead = true)
+        {
+            return Base.GetDescription4Enum(@enum);
+        }
         #endregion
 
         #region object
