@@ -16,7 +16,8 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
-            loger();
+            logger();
+            //loger();
             //ConvertIp();
             //EL();
             //regexMatch();
@@ -26,6 +27,19 @@ namespace ConsoleApp
             //testCache();
             //testConvertor();
             Console.ReadLine();
+        }
+        static void logger()
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                LogH.Debug($"{i} - 1111");
+                LogH.Error($"{i} - eeee");
+                LogH.Fatal($"{i} - ffffff");
+                LogH.Info($"{i} - iiiiii");
+                LogH.Warn($"{i} - wwwwww");
+                Console.WriteLine(i.ToString()+" -------------------------------------");
+                Thread.Sleep(100);
+            }
         }
         static void loger()
         {

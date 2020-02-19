@@ -13,7 +13,11 @@ namespace TempDemo
         static void Main(string[] args)
         {
             //test();
-            CheckCRC();
+            //CheckCRC();
+            //var dt = DateTime.Now;
+            //var s = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff");
+            //var dt0 = DateTime.Parse(s);
+            Console.ReadLine();
         }
         public delegate string AsyncMethodCaller(int callDuration, out int threadId);
         private static void callBackMethod(IAsyncResult ar)
