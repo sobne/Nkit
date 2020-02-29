@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Nkit\Nkit\Nkit.csproj">
+      <Project>{ba2d545b-e8c9-4844-87bb-7da133ab500f}</Project>
+      <Name>Nkit</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -36,6 +36,7 @@ namespace Nkit.Log
             {
                 queueLog.TryDequeue(out QueueLogModel logModel);
                 LoggerUtil.Append(logModel.Message, logModel.Name, logModel.Module, logModel.LogType);
+                Thread.Sleep(1);
             }
         }
         private static void ProduceMessage(string message, string name = "", string module = "", LoggerType loggerType = LoggerType.Debug, bool logTypeDist = false)

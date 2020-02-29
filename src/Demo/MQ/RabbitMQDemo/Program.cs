@@ -115,7 +115,7 @@ namespace RabbitMQDemo
                     args.Add("x-message-ttl", 10000);
                     channel.QueueDeclare(queue, false, false, false, args);
 
-                    Console.WriteLine("准备接收消息(消息10s后过期)：");
+                    Console.WriteLine("准备接收消息(消息10s后过期).输入'get'开始获取");
                     while (true)
                     {
                         string input = Console.ReadLine();
@@ -140,8 +140,8 @@ namespace RabbitMQDemo
                                 }
                                 Thread.Sleep(20);
                             }
-                            
                         }
+                        Thread.Sleep(1000);
                     }
                 }
             }

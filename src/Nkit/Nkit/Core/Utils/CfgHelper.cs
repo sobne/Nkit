@@ -8,13 +8,40 @@ namespace Nkit.Core.Utils
 {
     public class CfgHelper
     {
-        public static string GetAppSetting(string name)
+        public static class AppSetting
         {
-            return ConfigurationManager.AppSettings[name].ToString();
+            public static string GetValue(string key)
+            {
+                return ConfigurationManager.AppSettings[key].ToString();
+            }
+            public static T Get<T>(string key)
+            {
+                var val = GetValue(key);
+                if (val != null)
+                    return (T)Convert.ChangeType(val,typeof(T));
+                else
+                    return default(T);
+            }
+            public static T TryGet<T>(string key, T defaultValue)
+            {
+                try
+                {
+                    object obj = GetValue(key);
+                    if (obj != null)
+                        return (T)obj;
+                }
+                catch (Exception)
+                {
+
+                }
+                return defaultValue;
+            }
         }
-        public static string GetConnectionString(string name)
+
+        public static string GetConnectionString(string key)
         {
-            return ConfigurationManager.ConnectionStrings[name].ConnectionString;
+            return ConfigurationManager.ConnectionStrings[key].ConnectionString;
         }
     }
+    
 }

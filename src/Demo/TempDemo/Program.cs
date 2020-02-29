@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Nkit.Core.Utils;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -12,6 +13,21 @@ namespace TempDemo
     {
         static void Main(string[] args)
         {
+            try
+            {
+                var v = CfgHelper.AppSetting.Get<string>("appTitle");
+                var v0 = CfgHelper.AppSetting.TryGet<long>("appTitle",99);
+                var v30 = CfgHelper.AppSetting.TryGet<int>("appTitle",10);
+                var v40 = CfgHelper.AppSetting.TryGet<decimal>("appTitle", 10.1m);
+                var v3 = CfgHelper.AppSetting.Get<decimal>("appTitle");
+                var v31 = CfgHelper.AppSetting.Get<int>("appTitle");
+                var v2 = CfgHelper.AppSetting.Get<long>("appTitle");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                //throw;
+            }
             //test();
             //CheckCRC();
             //var dt = DateTime.Now;
