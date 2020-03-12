@@ -1,3 +1,5 @@
+2020-03-08 Winapp		- HttpClient app
+
 2019-12-28 Demo		- ConnectionCheckApp
 2019-10-29 Nkit		- DataTable2Dictionary(avoid ajax return json by via datatable)
 2019-09-06 Winapp		- FormatTypeSetting & wpfdemo

@@ -137,7 +137,7 @@ namespace Nkit.Web
         /// <returns></returns>
         public static RssUtility GetRss(string url)
         {
-            string xml =new WebRequest().FetchPage(url);
+            string xml =new WebRequestUtil().FetchPage(url);
             return XMLHelper.LoadXmlString(xml, typeof(RssUtility)) as RssUtility;
         }
     }

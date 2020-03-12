@@ -71,6 +71,12 @@
     <Compile Include="Log\LoggerType.cs" />
     <Compile Include="Log\LoggerUtil.cs" />
     <Compile Include="Net\CustomerCredentials.cs" />
+    <Compile Include="Net\Http\WebCookieType.cs" />
+    <Compile Include="Net\Http\HttpProvider.cs" />
+    <Compile Include="Net\Http\WebRequestParameter.cs" />
+    <Compile Include="Net\Http\WebResponseParameter.cs" />
+    <Compile Include="Net\Http\HttpUtil.cs" />
+    <Compile Include="Net\Http\IHttpProvider.cs" />
     <Compile Include="Net\NetHelper.cs" />
     <Compile Include="Net\Sockets\UdpUtils.cs" />
     <Compile Include="Net\WebRequest.cs" />

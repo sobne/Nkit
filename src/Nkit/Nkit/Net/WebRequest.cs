@@ -7,10 +7,10 @@ using System.Text;
 
 namespace Nkit.Net
 {
-    public class WebRequest
+    public class WebRequestUtil
     {
         private HttpWebRequest _req;
-        public WebRequest()
+        public WebRequestUtil()
         {
             
         }
