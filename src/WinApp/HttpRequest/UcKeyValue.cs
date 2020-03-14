@@ -29,7 +29,7 @@ namespace HttpRequest
             }
         }
 
-        public Dictionary<string, string> GetValues()
+        public IDictionary<string, string> GetValues()
         {
             var dic = new Dictionary<string, string>();
             for (int i = 0; i < dataGridView1.RowCount - 1; i++)

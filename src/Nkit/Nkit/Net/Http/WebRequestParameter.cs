@@ -63,6 +63,9 @@ namespace Nkit.Net.Http
         /// </summary>
         public string RefererUrl { get; set; }
 
+        /// <summary>
+        /// new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8000)
+        /// </summary>
         public IPEndPoint BindIpEndPoint { get; set; }
     }
 }

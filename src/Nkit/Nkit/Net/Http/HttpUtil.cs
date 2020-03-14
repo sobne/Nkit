@@ -101,7 +101,6 @@ namespace Nkit.Net.Http
         /// <param name="requestParameter">请求参数对象</param>
         static void SetParameter(HttpWebRequest webRequest, WebRequestParameter requestParameter)
         {
-            if (requestParameter.Parameters == null || requestParameter.Parameters.Count <= 0) return;
 
             
             if (requestParameter.Method== HttpMethod.POST)
@@ -109,6 +108,7 @@ namespace Nkit.Net.Http
                 var para = string.Empty;
                 if(requestParameter.ContentType== HttpContentType.x_www_form_urlencoded)
                 {
+                    if (requestParameter.Parameters == null || requestParameter.Parameters.Count <= 0) return;
                     StringBuilder data = new StringBuilder(string.Empty);
                     foreach (KeyValuePair<string, string> keyValuePair in requestParameter.Parameters)
                     {
