@@ -159,11 +159,22 @@ namespace Nkit.Core
             T Ret = default(T);
             if(obj!=null)
             {
-                var ser = new XmlSerializer(typeof(T));
-                var stream = new MemoryStream();
-                ser.Serialize(stream, obj);
-                stream.Seek(0, SeekOrigin.Begin);
-                Ret = (T)ser.Deserialize(stream);
+                object retval;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    XmlSerializer xml = new XmlSerializer(typeof(T));
+                    xml.Serialize(ms, obj);
+                    ms.Seek(0, SeekOrigin.Begin);
+                    retval = xml.Deserialize(ms);
+                    ms.Close();
+                }
+                Ret= (T)retval;
+
+                //var ser = new XmlSerializer(typeof(T));
+                //var stream = new MemoryStream();
+                //ser.Serialize(stream, obj);
+                //stream.Seek(0, SeekOrigin.Begin);
+                //Ret = (T)ser.Deserialize(stream);
             }
             return Ret;
         }
