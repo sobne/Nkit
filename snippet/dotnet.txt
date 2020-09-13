@@ -85,3 +85,11 @@ dism /online /enable-feature /featurename:IIS-ISAPIFilter
 dism /online /enable-feature /featurename:IIS-ISAPIExtensions
 dism /online /enable-feature /featurename:IIS-NetFxExtensibility45
 dism /online /enable-feature /featurename:IIS-ASPNET45
+
+----------------------
+代码行数统计:
+b*[^:b#/]+.*$
+Ctrl+Shift+F -> 正则表达式 -> *.cs;*.cshtml
+
+
+

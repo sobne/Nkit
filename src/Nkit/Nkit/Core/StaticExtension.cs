@@ -21,6 +21,9 @@ using System.Text.RegularExpressions;
 using Nkit.Core.Expression;
 using System.Data;
 using System.Reflection;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Nkit.Core
 {
@@ -423,5 +426,32 @@ namespace Nkit.Core
             return (s == null) ? "" : Regex.Match(s, pattern).Value;
         }
         #endregion
+
+
+        #region serializer
+        public static byte[] Serializer(this object _obj)
+        {
+            byte[] bytes;
+            using (var _ms = new MemoryStream())
+            {
+                IFormatter _BinaryFormatter = new BinaryFormatter();
+                _BinaryFormatter.Serialize(_ms, _obj);
+                bytes = _ms.ToArray();
+            }
+            return bytes;
+        }
+
+        public static T Deserializer<T>(this byte[] _bytes)
+        {
+            T ReturnValue;
+            using (var _ms = new MemoryStream(_bytes))
+            {
+                IFormatter _BinaryFormatter = new BinaryFormatter();
+                ReturnValue = (T)_BinaryFormatter.Deserialize(_ms);
+            }
+            return ReturnValue;
+        }
+        #endregion
+
     }
 }

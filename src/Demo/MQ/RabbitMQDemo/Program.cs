@@ -24,6 +24,7 @@ namespace RabbitMQDemo
             Console.WriteLine("B    basicpublisher       b    basicconsumer");
             Console.WriteLine("C    subcribeproducer     c    subcribeconsumer");
             Console.WriteLine("D    subcribepublish      d    subcribereceive");
+            Console.WriteLine("D1    subcribepublish1     d1    subcribereceive1");
             Console.WriteLine("E    highpublish          e    highreceive");
             var input = Console.ReadLine();
             switch (input)
@@ -59,6 +60,14 @@ namespace RabbitMQDemo
                 case "d":
                 case "subcribereceive":
                     subcribereceive();
+                    break;
+                case "D1":
+                case "subcribepublish1":
+                    subcribepublish1();
+                    break;
+                case "d1":
+                case "subcribereceive1":
+                    subcribereceive1();
                     break;
                 case "E":
                 case "highpublish":
@@ -324,6 +333,45 @@ namespace RabbitMQDemo
         }
         #endregion
         #region subcribe
+        static void subs(int i)
+        {
+            var routingKey = "*.rabbit";
+            var message = "Hello World" + DateTime.Now.ToString("HH:mm:ss.fff");
+            var body = Encoding.UTF8.GetBytes(message);
+
+            var factory = new ConnectionFactory { Uri = _url };
+            using (var connection = factory.CreateConnection())
+            {
+                using (var channel = connection.CreateModel())
+                {
+                    string exchange = string.Format("Ex{0}.Logs", _appID);
+
+                    channel.ExchangeDeclare(exchange, "topic");
+
+                    channel.BasicPublish(exchange, routingKey, null, body);
+
+                    Console.WriteLine("已发送的消息：{2}  '{0}':'{1}'",i, routingKey, message);
+                    Thread.Sleep(100*1000);
+                }
+            }
+        }
+        static void subcribepublish1()
+        {
+            while (true)
+            {
+                Console.Write("自动发送消息 数量：");
+                var keyWithMsg = Console.ReadLine();
+
+                var k = Convert.ToInt32(keyWithMsg);
+                for (int i = 0; i < k; i++)
+                {
+                    Thread thread = new Thread(new ThreadStart(() => subs(i)));
+                    thread.Start();
+                    Thread.Sleep(1);
+                }
+            }
+            
+        }
         static void subcribepublish()
         {
             var factory = new ConnectionFactory { Uri = _url };
@@ -382,6 +430,45 @@ namespace RabbitMQDemo
                             Console.WriteLine("接收到的消息： '{0}':'{1}'", routingKey, message);
                         };
                         channel.BasicConsume(queueName, true, consumer); 
+                    }
+                }
+            }
+        }
+        static void subcribereceive1()
+        {
+            var factory = new ConnectionFactory { Uri = _url,AutomaticRecoveryEnabled=true };
+            using (var connection = factory.CreateConnection())
+            {
+                using (var channel = connection.CreateModel())
+                {
+                    string exchange = string.Format("Ex{0}.Logs", _appID);
+
+                    channel.ExchangeDeclare(exchange, "topic");
+                    var queueName = channel.QueueDeclare().QueueName;
+
+                    Console.Write("请输入准备监听的消息主题格式，格式如'*.rabbit'或者'info.*'或者'info.warning.error'等：");
+
+
+
+                    while (true)
+                    {
+                        var bindingKey = Console.ReadLine();
+                        channel.QueueBind(queueName, exchange, bindingKey);
+
+                        var consumer = new QueueingBasicConsumer(channel);
+                        channel.BasicConsume(queueName, true, consumer);
+
+                        Console.WriteLine(" [*] Waiting for messages." +
+                                          "To exit press CTRL+C");
+                        while (true)
+                        {
+                            var ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
+
+                            var body = ea.Body;
+                            var message = Encoding.UTF8.GetString(body);
+                            Console.WriteLine(" [x] {0}", message);
+                        }
+                        
                     }
                 }
             }

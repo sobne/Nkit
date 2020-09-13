@@ -14,6 +14,10 @@ rabbitmqctl.bat add_user test test
 
 rabbitmq-plugins.bat enable rabbitmq_management
 
+rabbitmq-plugins enable rabbitmq_tracing
+rabbitmqctl trace_on
+rabbitmqctl trace_off
+
 net stop RabbitMQ && net start RabbitMQ
 
 net stop rabbitMQ
