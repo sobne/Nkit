@@ -34,6 +34,14 @@ namespace Nkit.RabbitMq
             }
             return _instance;
         }
+        public void Close()
+        {
+            //if (null != _consumer && _consumer.IsRunning)
+            //{
+            //    if (null != _channel) _channel.Close();
+            //    if (null != Connection) Connection.Close();
+            //}
+        }
         public void Connect(string uri,bool autoReconnect=false)
         {
             _uri = uri;
