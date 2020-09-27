@@ -449,26 +449,20 @@ namespace RabbitMQDemo
                     Console.Write("请输入准备监听的消息主题格式，格式如'*.rabbit'或者'info.*'或者'info.warning.error'等：");
 
 
+                    var bindingKey = Console.ReadLine();
+                    channel.QueueBind(queueName, exchange, bindingKey);
 
+                    var consumer = new QueueingBasicConsumer(channel);
+                    channel.BasicConsume(queueName, true, consumer);
+
+                    Console.WriteLine(" [*] Waiting for messages. To exit press CTRL+C");
                     while (true)
                     {
-                        var bindingKey = Console.ReadLine();
-                        channel.QueueBind(queueName, exchange, bindingKey);
+                        var ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
 
-                        var consumer = new QueueingBasicConsumer(channel);
-                        channel.BasicConsume(queueName, true, consumer);
-
-                        Console.WriteLine(" [*] Waiting for messages." +
-                                          "To exit press CTRL+C");
-                        while (true)
-                        {
-                            var ea = (BasicDeliverEventArgs)consumer.Queue.Dequeue();
-
-                            var body = ea.Body;
-                            var message = Encoding.UTF8.GetString(body);
-                            Console.WriteLine(" [x] {0}", message);
-                        }
-                        
+                        var body = ea.Body;
+                        var message = Encoding.UTF8.GetString(body);
+                        Console.WriteLine(" [x] {0}", message);
                     }
                 }
             }
