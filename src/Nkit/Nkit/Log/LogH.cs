@@ -4,19 +4,12 @@ using System.Threading;
 
 namespace Nkit.Log
 {
-    public class QueueLogModel
-    {
-        public string Message { get; set; }
-        public string Name { get; set; }
-        public string Module { get; set; }
-        public LoggerType LogType { get; set; }
-    }
     public static class LogH
     {
-        private static ConcurrentQueue<QueueLogModel> queueLog { get; set; }
+        private static ConcurrentQueue<LoggerModel> queueLog { get; set; }
         static LogH()
         {
-            queueLog = new ConcurrentQueue<QueueLogModel>();
+            queueLog = new ConcurrentQueue<LoggerModel>();
             Start();
         }
         private static void Start()
@@ -34,14 +27,14 @@ namespace Nkit.Log
         {
             while (queueLog.Count > 0)
             {
-                queueLog.TryDequeue(out QueueLogModel logModel);
-                LoggerUtil.Append(logModel.Message, logModel.Name, logModel.Module, logModel.LogType);
+                queueLog.TryDequeue(out LoggerModel logModel);
+                LoggerUtil.Append(logModel);
                 Thread.Sleep(1);
             }
         }
         private static void ProduceMessage(string message, string name = "", string module = "", LoggerType loggerType = LoggerType.Debug, bool logTypeDist = false)
         {
-            queueLog.Enqueue(new QueueLogModel
+            queueLog.Enqueue(new LoggerModel
             {
                 Message=message,
                 Name=name,

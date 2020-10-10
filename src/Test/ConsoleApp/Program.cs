@@ -20,7 +20,7 @@ namespace ConsoleApp
             //loger();
             //ConvertIp();
             //EL();
-            //regexMatch();
+            regexMatch();
 
             //listtest();
             //log();
@@ -30,7 +30,7 @@ namespace ConsoleApp
         }
         static void logger()
         {
-            for (int i = 0; i < 1000; i++)
+            for (int i = 0; i < 100; i++)
             {
                 LogH.Debug($"{i} - 1111");
                 LogH.Error($"{i} - eeee");
@@ -38,7 +38,7 @@ namespace ConsoleApp
                 LogH.Info($"{i} - iiiiii");
                 LogH.Warn($"{i} - wwwwww");
                 Console.WriteLine(i.ToString()+" -------------------------------------");
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
         }
         static void loger()
@@ -79,7 +79,11 @@ namespace ConsoleApp
                 {
                     break;
                 }
-                Console.WriteLine(Regex.IsMatch(input, stringMatch) ? "true" : "false");
+                if (input.ToLower() == "logger")
+                {
+                    logger();
+                }
+                //Console.WriteLine(Regex.IsMatch(input, stringMatch) ? "true" : "false");
             }
                 
         }
