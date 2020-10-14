@@ -37,8 +37,14 @@ namespace Nkit.Log
         {
             try
             {
+
                 _lastClearTime = DateTime.Now;
                 var dtLine = DateTime.Today.AddMonths(-6);
+                var ov= LoggerConfigManager.Instance.OverTime.Value;
+                var o = LoggerConfigManager.Instance.OverTime.TimeSpan.ToLower();
+                if (o.Equals("day")) dtLine = DateTime.Today.AddDays(-ov);
+                else if (o.Equals("month")) dtLine = DateTime.Today.AddMonths(-ov);
+                else if (o.Equals("year")) dtLine = DateTime.Today.AddYears(-ov);
                 var folder = new DirectoryInfo(_rootPath);
                 foreach (var dir in folder.GetDirectories())
                 {
@@ -48,6 +54,7 @@ namespace Nkit.Log
                         dir.Delete(true);
                     }
                 }
+                FileHelper.Append(Path.Combine(_rootPath, "clear.log"), DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "  C");
             }
             catch (Exception)
             {
@@ -55,7 +62,7 @@ namespace Nkit.Log
                 //throw;
             }
         }
-        public static void Append(string message, string name="", string module = "",  LoggerType logType= LoggerType.Debug, bool logTypeDist =false)
+        public static void Append(string message, string name="", string module = "",  LoggerLevel logType= LoggerLevel.Debug, bool logTypeDist =false)
         {
             if (string.IsNullOrEmpty(_rootPath))
             {
@@ -68,7 +75,7 @@ namespace Nkit.Log
             DelLog();
 
             var fileName = logTypeDist ? GetName(name, logType.ToString()) : GetName(name);
-            var logFile =System.IO.Path.Combine(path, fileName);
+            var logFile =Path.Combine(path, fileName);
 
             var content = GetLogWithTime(module, message,logType.ToString());
             Console.WriteLine(content);

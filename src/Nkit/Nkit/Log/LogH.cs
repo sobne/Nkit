@@ -32,7 +32,7 @@ namespace Nkit.Log
                 Thread.Sleep(1);
             }
         }
-        private static void ProduceMessage(string message, string name = "", string module = "", LoggerType loggerType = LoggerType.Debug, bool logTypeDist = false)
+        private static void ProduceMessage(string message, string name = "", string module = "", LoggerLevel loggerType = LoggerLevel.Debug, bool logTypeDist = false)
         {
             queueLog.Enqueue(new LoggerModel
             {
@@ -44,7 +44,7 @@ namespace Nkit.Log
         }
         public static void Debug(string message, string name = "", string module = "")
         {
-            ProduceMessage(message, name, module, LoggerType.Debug);
+            ProduceMessage(message, name, module, LoggerLevel.Debug);
         }
 
         public static void Debug(string format, params object[] args)
@@ -55,7 +55,7 @@ namespace Nkit.Log
 
         public static void Error(string message, string name = "", string module = "")
         {
-            ProduceMessage(message, name, module, LoggerType.Error);
+            ProduceMessage(message, name, module, LoggerLevel.Error);
         }
 
         public static void Error(string format, params object[] args)
@@ -66,7 +66,7 @@ namespace Nkit.Log
 
         public static void Fatal(string message, string name = "", string module = "")
         {
-            ProduceMessage(message, name, module, LoggerType.Fatal);
+            ProduceMessage(message, name, module, LoggerLevel.Fatal);
         }
 
         public static void Fatal(string format, params object[] args)
@@ -77,7 +77,7 @@ namespace Nkit.Log
 
         public static void Info(string message, string name = "", string module = "")
         {
-            ProduceMessage(message, name, module, LoggerType.Info);
+            ProduceMessage(message, name, module, LoggerLevel.Info);
         }
 
         public static void Info(string format, params object[] args)
@@ -88,7 +88,7 @@ namespace Nkit.Log
 
         public static void Warn(string message, string name = "", string module = "")
         {
-            ProduceMessage(message, name, module, LoggerType.Warn);
+            ProduceMessage(message, name, module, LoggerLevel.Warning);
         }
 
         public static void Warn(string format, params object[] args)

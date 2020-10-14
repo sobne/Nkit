@@ -22,7 +22,7 @@ namespace Nkit.Log
         }
         public void Debug(string text)
         {
-            LoggerUtil.Append(text, _Name, _Module, LoggerType.Debug);
+            LoggerUtil.Append(text, _Name, _Module, LoggerLevel.Debug);
         }
 
         public void Debug(string format, params object[] args)
@@ -33,7 +33,7 @@ namespace Nkit.Log
 
         public void Error(string text)
         {
-            LoggerUtil.Append(text, _Name, _Module, LoggerType.Error);
+            LoggerUtil.Append(text, _Name, _Module, LoggerLevel.Error);
         }
 
         public void Error(string format, params object[] args)
@@ -44,7 +44,7 @@ namespace Nkit.Log
 
         public void Fatal(string text)
         {
-            LoggerUtil.Append(text, _Name, _Module, LoggerType.Fatal);
+            LoggerUtil.Append(text, _Name, _Module, LoggerLevel.Fatal);
         }
 
         public void Fatal(string format, params object[] args)
@@ -55,7 +55,7 @@ namespace Nkit.Log
 
         public void Info(string text)
         {
-            LoggerUtil.Append(text, _Name, _Module, LoggerType.Info);
+            LoggerUtil.Append(text, _Name, _Module, LoggerLevel.Info);
         }
 
         public void Info(string format, params object[] args)
@@ -66,7 +66,7 @@ namespace Nkit.Log
 
         public void Warn(string text)
         {
-            LoggerUtil.Append(text, _Name, _Module, LoggerType.Warn);
+            LoggerUtil.Append(text, _Name, _Module, LoggerLevel.Warning);
         }
 
         public void Warn(string format, params object[] args)
