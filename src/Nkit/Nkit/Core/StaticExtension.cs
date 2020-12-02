@@ -379,8 +379,24 @@ namespace Nkit.Core
         #endregion
 
 
-        public static IList<T> GetPager<T>(this List<T> list, int page, int pagesize)
+        //public static IList<T> GetPager<T>(this List<T> list, int page, int pagesize)
+        //{
+        //    if (page <= 0) page = 1;
+        //    if (pagesize <= 0) pagesize = 10;
+        //    IList<T> targetList = new List<T>();
+        //    for (var i = 0; i < list.Count; i++)
+        //    {
+        //        if (i >= (page - 1) * pagesize && i < page * pagesize)
+        //        {
+        //            targetList.Add(list[i]);
+        //        }
+        //    }
+        //    return targetList;
+        //}
+        public static IList<T> GetPager<T>(this IList<T> list, int page, int pagesize)
         {
+            if (page <= 0) page = 1;
+            if (pagesize <= 0) pagesize = 10;
             IList<T> targetList = new List<T>();
             for (var i = 0; i < list.Count; i++)
             {

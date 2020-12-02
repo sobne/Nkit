@@ -192,15 +192,7 @@ namespace Nkit.Web.Object
         }
         #endregion
 
-        #region GetRawUrl/IsBrowserGet/IsSearchEnginesGet/GetPageName/GetQParamCount/GetFParamCount/GetParamCount/
-        /// <summary>
-        /// 获取当前请求的原始 URL(URL 中域信息之后的部分,包括查询字符串(如果存在))
-        /// </summary>
-        /// <returns>原始 URL</returns>
-        public static string GetRawUrl()
-        {
-            return HttpContext.Current.Request.RawUrl;
-        }
+        #region IsBrowserGet/IsSearchEnginesGet/GetPageName/GetQParamCount/GetFParamCount/GetParamCount/
         /// <summary>
         /// 判断当前访问是否来自浏览器软件
         /// </summary>
@@ -261,9 +253,14 @@ namespace Nkit.Web.Object
         public static int GetFParamCount() { return (HttpContext.Current.Request.Form.Count); }
         #endregion
 
-        #region GetCurrentFullHost/GetHost/GetIP/GetUrl/GetReferrer/SaveRequestFile/GetOS/GetBrowser
+        #region GetCurrentFullHost/GetHost/GetIP/GetUrl/GetRawUrl/GetReferrer/SaveRequestFile/GetOS/GetBrowser
         /// <summary>
-        /// 取全IP包括端口
+        /// 前台URL:http://www.abc.com/ddd/1.html?v=1&a=bb
+        /// </summary>
+        /// <returns></returns>
+        public static string GetUrl() { return HttpContext.Current.Request.Url.ToString(); }
+        /// <summary>
+        /// 取全IP包括端口:www.abc.com:80
         /// </summary>
         /// <returns>IP和端口</returns>
         public static string GetCurrentFullHost()
@@ -274,15 +271,35 @@ namespace Nkit.Web.Object
             return request.Url.Host;
         }
         /// <summary>
-        /// 取主机名
+        /// 取主机名:www.abc.com
         /// </summary>
         /// <returns></returns>
         public static string GetHost() { return HttpContext.Current.Request.Url.Host; }
         /// <summary>
-        /// 前台URL
+        /// 站点名+页面名:ddd/1.html
         /// </summary>
         /// <returns></returns>
-        public static string GetUrl() { return HttpContext.Current.Request.Url.ToString(); }
+        public static string GetAbsolutePath()
+        {
+            return HttpContext.Current.Request.Url.AbsolutePath;
+        }
+        /// <summary>
+        /// 获取当前请求的原始 URL(URL 中域信息之后的部分,包括查询字符串(如果存在)):/ddd/1.html?v=1&a=bb
+        /// </summary>
+        /// <returns>原始 URL</returns>
+        public static string GetRawUrl()
+        {
+            return HttpContext.Current.Request.RawUrl;
+            //return HttpContext.Current.Url.PathAndQuery;
+        }
+        /// <summary>
+        /// 获取url参数 : ?v=1&a=bb
+        /// </summary>
+        /// <returns></returns>
+        public static string GetQuery()
+        {
+            return HttpContext.Current.Request.Url.Query;
+        }
         /// <summary>
         /// 来源URL
         /// </summary>
