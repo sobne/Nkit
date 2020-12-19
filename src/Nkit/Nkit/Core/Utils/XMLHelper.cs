@@ -233,5 +233,32 @@ namespace Nkit.Core.Utils
                 return obj;
             }
         }
+        public static string Format(string outxml)
+        {
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(outxml);
+            return Format(doc);
+        }
+        public static string Format(XmlDocument xml)
+        {
+            XmlDocument xd = xml as XmlDocument;
+            StringBuilder sb = new StringBuilder();
+            StringWriter sw = new StringWriter(sb);
+            XmlTextWriter xtw = null;
+            try
+            {
+                xtw = new XmlTextWriter(sw);
+                xtw.Formatting = Formatting.Indented;
+                xtw.Indentation = 1;
+                xtw.IndentChar = '\t';
+                xd.WriteTo(xtw);
+            }
+            finally
+            {
+                if (xtw == null)
+                    xtw.Close();
+            }
+            return sb.ToString();
+        }
     }
 }

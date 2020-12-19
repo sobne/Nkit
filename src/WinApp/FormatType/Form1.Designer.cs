@@ -32,6 +32,7 @@
             this.格式化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.jsonToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unicodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xmlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +49,7 @@
             // 格式化ToolStripMenuItem
             // 
             this.格式化ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xmlToolStripMenuItem,
             this.jsonToolStripMenuItem,
             this.unicodeToolStripMenuItem});
             this.格式化ToolStripMenuItem.Name = "格式化ToolStripMenuItem";
@@ -67,6 +69,13 @@
             this.unicodeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.unicodeToolStripMenuItem.Text = "unicode";
             this.unicodeToolStripMenuItem.Click += new System.EventHandler(this.unicodeToolStripMenuItem_Click);
+            // 
+            // xmlToolStripMenuItem
+            // 
+            this.xmlToolStripMenuItem.Name = "xmlToolStripMenuItem";
+            this.xmlToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.xmlToolStripMenuItem.Text = "xml";
+            this.xmlToolStripMenuItem.Click += new System.EventHandler(this.xmlToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -92,6 +101,7 @@
         private System.Windows.Forms.ToolStripMenuItem 格式化ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem jsonToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unicodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xmlToolStripMenuItem;
     }
 }
 

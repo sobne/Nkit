@@ -70,6 +70,12 @@
     <Compile Include="unicode.Designer.cs">
       <DependentUpon>unicode.cs</DependentUpon>
     </Compile>
+    <Compile Include="xmlFrm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="xmlFrm.Designer.cs">
+      <DependentUpon>xmlFrm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -88,6 +94,9 @@
     </Compile>
     <EmbeddedResource Include="unicode.resx">
       <DependentUpon>unicode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="xmlFrm.resx">
+      <DependentUpon>xmlFrm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

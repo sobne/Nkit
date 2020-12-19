@@ -17,6 +17,20 @@ namespace FormatType
             InitializeComponent();
         }
 
+        private void xmlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (Form frm in this.MdiChildren)
+            {
+                if (frm is xmlFrm)
+                {
+                    frm.Activate();
+                    return;
+                }
+            }
+            xmlFrm m = new xmlFrm();
+            m.MdiParent = this;
+            m.Show();
+        }
         private void jsonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             foreach (Form frm in this.MdiChildren)
@@ -46,5 +60,6 @@ namespace FormatType
             m.MdiParent = this;
             m.Show();
         }
+
     }
 }

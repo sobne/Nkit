@@ -14,11 +14,23 @@ namespace Nkit.Web
             //TODO: 在此处添加构造函数逻辑
             //
         }
+        /// <summary>
+        /// JavaScriptSerializer().Serialize(object)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static string Serialize<T>(T data)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
             return serializer.Serialize(data);
         }
+        /// <summary>
+        ///  JavaScriptSerializer().Deserialize<T>(json)
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="json"></param>
+        /// <returns></returns>
         public static T Deserialize<T>(string json)
         {
             JavaScriptSerializer serializer = new JavaScriptSerializer();
