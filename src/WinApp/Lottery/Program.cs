@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Lottery
+namespace LotteryChooser
 {
     static class Program
     {
@@ -17,8 +18,9 @@ namespace Lottery
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //Application.Run(new MainForm());
-            Application.Run(new DoGift.GiftForm());
+            var lt = ConfigurationManager.AppSettings["LotteryType"].ToString();
+            if (lt == "1") Application.Run(new DoGift.GiftForm());
+            else Application.Run(new MainForm());
             //buildLucker();
         }
 

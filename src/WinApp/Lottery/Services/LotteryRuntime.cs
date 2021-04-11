@@ -1,5 +1,5 @@
-﻿using Lottery.Entity;
-using Lottery.Utils;
+﻿using LotteryChooser.Entity;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Lottery.Services
+namespace LotteryChooser.Services
 {
     public class LotteryRuntime
     {
@@ -43,7 +43,7 @@ namespace Lottery.Services
 
         private IList<Gift> gifts;      //奖品
         private IList<Gift> gifts_left; //奖池
-        private IList<Lucker> luckers;  //参与者
+        private IList<Chooser> luckers;  //参与者
         private IList<Winner> winners;  //幸运者
         //private IList<Lucker> CurLuckers;
         private delegate void Handler();
@@ -81,8 +81,8 @@ namespace Lottery.Services
             {
                 foreach (var item in winners)
                 {
-                    if(item.Lucker!=null)
-                        item.Lucker.Photo = GetPhoto(_currentpath + item.Lucker.Pic);
+                    if(item.Chooser!=null)
+                        item.Chooser.Img = GetImg(_currentpath + item.Chooser.Pic);
                 }
             }
             luckers = LoadLuckers();
@@ -127,7 +127,7 @@ namespace Lottery.Services
             //return gifts.Count >= giftIds.Count;
         }
 
-        public void AddLuckers(IList<Lucker> list)
+        public void AddLuckers(IList<Chooser> list)
         {
             if (list == null) return;
             //CurLuckers = list;
@@ -167,7 +167,7 @@ namespace Lottery.Services
         {
             return this.gifts;
         }
-        public IList<Lucker> GetLuckers()
+        public IList<Chooser> GetLuckers()
         {
             return this.luckers;
         }
@@ -250,75 +250,113 @@ namespace Lottery.Services
         {
             try
             {
-                XmlHelper xmlhepler = new XmlHelper(AppSetting.GiftXml);
-                XmlNodeList nodes = xmlhepler.SelectNodes("/list/info");
-                if (nodes != null)
+                var json = File.ReadAllText(AppSetting.Gift);
+                var list = JsonConvert.DeserializeObject<List<Gift>>(json);
+                if (list == null) return null;
+                list.ForEach(x =>
                 {
-                    var list = new List<Gift>();
-                    foreach (XmlNode node in nodes)
-                    {
-                        Gift item = new Gift();
-                        XmlNodeList childnodes = node.ChildNodes;
-                        item.Id = Convert.ToInt32(node.Attributes[0].Value);
-                        item.Name = childnodes[0].InnerText;
-                        item.Number = Convert.ToInt32(childnodes[1].InnerText);
-                        item.NumberPerTime = Convert.ToInt32(childnodes[2].InnerText);
-                        item.Pic = childnodes[3].InnerText;
-                        item.Description = childnodes[4].InnerText;
-                        item.Title = childnodes[5].InnerText;
-                        item.Level = Convert.ToInt32(childnodes[6].InnerText);
-                        item.Photo = GetPhoto(_currentpath + item.Pic);
-                        list.Add(item);
-                    }
-                    return list;
-                }
-                xmlhepler = null;
+                    x.Img = GetImg(_currentpath + x.Pic);
+                });
+                return list;
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
-            return null;
         }
-        private IList<Lucker> LoadLuckers()
+        private IList<Chooser> LoadLuckers()
         {
             try
             {
-                XmlHelper xmlhepler = new XmlHelper(AppSetting.AvatarXml);
-                XmlNodeList nodes = xmlhepler.SelectNodes("/list/info");
-                if (nodes != null)
+                var json = File.ReadAllText(AppSetting.Avatar);
+                var list = JsonConvert.DeserializeObject<List<Chooser>>(json);
+                if (list == null) return null;
+                list.ForEach(x =>
                 {
-                    var list = new List<Lucker>();
-                    foreach (XmlNode node in nodes)
-                    {
-                        var Id = Convert.ToInt32(node.Attributes[0].Value);
-                        if (isWinner(Id)) continue;
-
-                        Lucker item = new Lucker();
-                        XmlNodeList childnodes = node.ChildNodes;
-                        item.Name = childnodes[0].InnerText;
-                        item.Department = childnodes[1].InnerText;
-                        item.Pic = childnodes[2].InnerText;
-                        item.Photo = GetPhoto(_currentpath + item.Pic);
-                        item.Remark = childnodes[3].InnerText;
-                        item.Id = Convert.ToInt32(node.Attributes[0].Value);
-                        list.Add(item);
-                    }
-                    return list;
-                }
-                xmlhepler = null;
-
+                    x.Img = GetImg(_currentpath + x.Pic);
+                });
+                return list;
             }
             catch (Exception)
             {
 
                 throw;
             }
-            
-            return null;
         }
+        //private IList<Gift> LoadGifts()
+        //{
+        //    try
+        //    {
+        //        XmlHelper xmlhepler = new XmlHelper(AppSetting.Gift);
+        //        XmlNodeList nodes = xmlhepler.SelectNodes("/list/info");
+        //        if (nodes != null)
+        //        {
+        //            var list = new List<Gift>();
+        //            foreach (XmlNode node in nodes)
+        //            {
+        //                Gift item = new Gift();
+        //                XmlNodeList childnodes = node.ChildNodes;
+        //                item.Id = Convert.ToInt32(node.Attributes[0].Value);
+        //                item.Name = childnodes[0].InnerText;
+        //                item.Number = Convert.ToInt32(childnodes[1].InnerText);
+        //                item.NumberPerTime = Convert.ToInt32(childnodes[2].InnerText);
+        //                item.Pic = childnodes[3].InnerText;
+        //                item.Description = childnodes[4].InnerText;
+        //                item.Title = childnodes[5].InnerText;
+        //                item.Level = Convert.ToInt32(childnodes[6].InnerText);
+        //                item.Photo = GetPhoto(_currentpath + item.Pic);
+        //                list.Add(item);
+        //            }
+        //            return list;
+        //        }
+        //        xmlhepler = null;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //    return null;
+        //}
+        //private IList<Lucker> LoadLuckers()
+        //{
+        //    try
+        //    {
+        //        XmlHelper xmlhepler = new XmlHelper(AppSetting.Avatar);
+        //        XmlNodeList nodes = xmlhepler.SelectNodes("/list/info");
+        //        if (nodes != null)
+        //        {
+        //            var list = new List<Lucker>();
+        //            foreach (XmlNode node in nodes)
+        //            {
+        //                var Id = Convert.ToInt32(node.Attributes[0].Value);
+        //                if (isWinner(Id)) continue;
+
+        //                Lucker item = new Lucker();
+        //                XmlNodeList childnodes = node.ChildNodes;
+        //                item.Name = childnodes[0].InnerText;
+        //                item.Department = childnodes[1].InnerText;
+        //                item.Pic = childnodes[2].InnerText;
+        //                item.Photo = GetPhoto(_currentpath + item.Pic);
+        //                item.Remark = childnodes[3].InnerText;
+        //                item.Id = Convert.ToInt32(node.Attributes[0].Value);
+        //                list.Add(item);
+        //            }
+        //            return list;
+        //        }
+        //        xmlhepler = null;
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //    return null;
+        //}
 
         void LoadGiftComplete(IAsyncResult result)
         {
@@ -362,23 +400,22 @@ namespace Lottery.Services
         {
             if (winners!=null && winners.Count > 0)
             {
-                return winners.Any(x => x.Lucker!=null && x.Lucker.Id.Equals(Id));
+                return winners.Any(x => x.Chooser!=null && x.Chooser.Id.Equals(Id));
             }
             return false;
         }
-        private Image GetPhoto(string path)
+        private Image GetImg(string path)
         {
-            Image photo;
+            Image img;
             try
             {
-                photo = Image.FromFile(path);
+                img = Image.FromFile(path);
             }
             catch
             {
-                photo = Image.FromFile(AppSetting.DefaultPhoto);
+                img = Image.FromFile(AppSetting.DefaultPhoto);
             }
-
-            return photo;
+            return img;
         }
     }
 }

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Lottery.Entity;
+using LotteryChooser.Entity;
 
-namespace Lottery.UserControls
+namespace LotteryChooser.UserControls
 {
     public partial class LuckerPaintControl : PaintControl
     {
@@ -23,9 +23,9 @@ namespace Lottery.UserControls
         {
             InitializeComponent();
             _ParentForm = parentForm;
-            _ParentForm.DoIt += new EventHandler(ParentForm_DoIt);
+            _ParentForm.FrmEvent += new EventHandler(ParentFrmEvent);
         }
-        void ParentForm_DoIt(object sender, EventArgs e)
+        void ParentFrmEvent(object sender, EventArgs e)
         {
 
         }
@@ -35,13 +35,13 @@ namespace Lottery.UserControls
             base.OnPaint(e);
         }
 
-        public List<Lucker> Items;
-        private delegate void handler(List<Lucker> items);
+        public List<Chooser> Items;
+        private delegate void handler(List<Chooser> items);
 
-        public void SetItems(IList<Lucker> items)
+        public void SetItems(IList<Chooser> items)
         {
             lock (lockObj)
-                Items = new List<Lucker>(items);
+                Items = new List<Chooser>(items);
 
             if (!InvokeRequired)
             {
@@ -57,13 +57,13 @@ namespace Lottery.UserControls
             Bitmap bmp = new Bitmap(this.Width, this.Height);
             Graphics g = Graphics.FromImage(bmp);
            // g.Clear(this.BackColor);
-            Lucker[] items = null;
+            Chooser[] items = null;
             lock (lockObj)
             {
                 if (Items == null || Items.Count <= 0) items = null;else
                 items = Items.ToArray();
             }
-            if (items == null) items = new Lucker[0];
+            if (items == null) items = new Chooser[0];
             var h = _ItemSize.Height;
             var w = _ItemSize.Width;
             for (int i = 0; i < _Points.Count && _Points.Count<=items.Length; i++)
@@ -79,7 +79,7 @@ namespace Lottery.UserControls
                 //    g.DrawRectangle(p, rect);
                 //}
                 /*绘制图像*/
-                Image srcImg = items[i].Photo;
+                Image srcImg = items[i].Img;
 
                 Rectangle dstRect = new Rectangle(x, y, _ItemSize.Width, _ItemSize.Height - TextHeight);
                 //   System.Drawing.Imaging.ImageAttributes attri = new System.Drawing.Imaging.ImageAttributes();  是否膳所这列，给一个矩阵即可

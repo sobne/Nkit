@@ -2,22 +2,36 @@
 using System.Drawing;
 using System.Xml.Serialization;
 
-namespace Lottery.Entity
+namespace LotteryChooser.Entity
 {
     public class GiftArgs : EventArgs
     {
-        public Gift giftInfo;
+        public Gift Gift;
 
-        public GiftArgs(Gift giftinfo)
+        public GiftArgs(Gift gift)
         {
-            this.giftInfo = giftinfo;
+            this.Gift = gift;
         }
     }
     [Serializable]
     /// <summary>
     /// 奖项信息
     /// </summary>
-    public class Gift
+    public class Gift: GiftDetail
+    {
+        [XmlIgnore]
+        public Image Img
+        {
+            get;
+            set;
+        }
+    }
+
+    [Serializable]
+    /// <summary>
+    /// 奖项信息
+    /// </summary>
+    public class GiftDetail
     {
         /// <summary>
         /// 标识 
@@ -56,11 +70,5 @@ namespace Lottery.Entity
         /// 级别
         /// </summary>
         public int Level { get; set; }
-        [XmlIgnore]
-        public Image Photo
-        {
-            get;
-            set;
-        }
     }
 }

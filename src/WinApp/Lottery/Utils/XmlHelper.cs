@@ -4,8 +4,11 @@ using System.Text;
 using System.Xml;
 using System.Data;
 
-namespace Lottery.Utils
+namespace LotteryChooser.Utils
 {
+    /// <summary>
+    /// 不要
+    /// </summary>
     public class XmlHelper
     {
         protected XmlDocument XmlDoc = new XmlDocument();

@@ -132,7 +132,7 @@
             this.Controls.Add(this.radBase64);
             this.Controls.Add(this.radAes);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "加解密";
             this.ResumeLayout(false);
             this.PerformLayout();
 

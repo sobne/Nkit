@@ -5,7 +5,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace Lottery.UserControls
+namespace LotteryChooser.UserControls
 {
     public partial class PaintControl : UserControl
     {

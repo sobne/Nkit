@@ -1,6 +1,9 @@
 install erlang
 install rabbitmq
 
+添加环境变量:ERLANG_HOME:C:\Program Files\erl9.3
+在Rabbitmq/../sbin/rabbitmqserver.bat下： set ERLANG_HOME=C:\Program Files\erl9.3
+
 # [Erlang/OTP](https://www.erlang.org)
 
 # [RabbitMQ] http://www.rabbitmq.com/download.html
@@ -25,3 +28,15 @@ rabbitmq-server stop
 rabbitmq-server start
 
 amqp://guest:guest@localhost:5672/
+
+
+------------------------------
+1. 查看用户列表：rabbitmqctl list_users
+
+2. 新增一个用户：rabbitmqctl add_user bruce 123456
+
+3. 删除一个用户：rabbitmqctl delete_user bruce
+
+4.修改用户密码：rabbitmqctl change_password bruce 654321
+
+5.授予管理员角色：rabbitmqctl set_user_tags bruce administrator

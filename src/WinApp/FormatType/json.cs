@@ -1,23 +1,17 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace FormatType
+namespace FormatStyler
 {
     public partial class json : Form
     {
         public json()
         {
             InitializeComponent();
+            textBox1.Text = "{\"name\":\"Xtools\",\"v1.0\":\"2021-01-01 16:05 工具上线\"}";
         }
 
         private void toolStripCompose_Click(object sender, EventArgs e)

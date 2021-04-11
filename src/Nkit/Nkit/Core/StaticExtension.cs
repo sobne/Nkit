@@ -18,7 +18,6 @@
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Nkit.Core.Expression;
 using System.Data;
 using System.Reflection;
 using System.IO;
@@ -86,7 +85,7 @@ namespace Nkit.Core
             }
             return result;
         }
-        public static float ToSingle(this object obj, float defaultValue)
+        public static float ToFloat(this object obj, float defaultValue)
         {
             float result;
             if (obj == DBNull.Value || obj == null)

@@ -5,9 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using Lottery.Entity;
+using LotteryChooser.Entity;
 
-namespace Lottery
+namespace LotteryChooser
 {
     public partial class WinListForm : Form
     {
@@ -59,7 +59,7 @@ namespace Lottery
             foreach (Winner info in winList)
             {
                 int winindex=(int)info.Gift.Id;
-                winpeopleLabel[winindex].Text = info.Lucker.Name + "   " + winpeopleLabel[winindex].Text;
+                winpeopleLabel[winindex].Text = info.Chooser.Name + "   " + winpeopleLabel[winindex].Text;
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace Lottery.DoGift
+﻿namespace LotteryChooser.DoGift
 {
     partial class GiftForm
     {
@@ -157,7 +157,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Lottery.Properties.Resources.bj;
+            this.BackgroundImage = global::LotteryChooser.Properties.Resources.bj;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(794, 574);
             this.Controls.Add(this.splitContainer1);

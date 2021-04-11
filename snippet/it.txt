@@ -1,0 +1,7 @@
+谷歌浏览器截取长屏幕（全屏截图）:
+1.按下键盘上 “F12” 或者 “Ctrl + Shift + L”  打开调试页面
+2.按下键盘上  “Ctrl+Shift+P”
+3.键入内容“Capture full size screenshot” 后，按下回车
+4.此时会下载图片
+
+

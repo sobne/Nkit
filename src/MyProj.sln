@@ -77,11 +77,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nkit.RabbitMq", "Nkit\Nkit.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempDemo", "Demo\TempDemo\TempDemo.csproj", "{ADB4809E-800D-4DAF-AEA6-1C800F939D77}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lottery", "WinApp\Lottery\Lottery.csproj", "{BFC85FDC-C861-4877-94D2-EFF0C25AA71E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LotteryChooser", "WinApp\Lottery\LotteryChooser.csproj", "{BFC85FDC-C861-4877-94D2-EFF0C25AA71E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfDemo", "Demo\WpfDemo\WpfDemo.csproj", "{7D7FE3AD-0D75-4BEE-8B43-CE35AAB64EB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormatType", "WinApp\FormatType\FormatType.csproj", "{13F98A4D-845F-4DC3-B1C1-4C02369DC655}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FormatStyler", "WinApp\FormatType\FormatStyler.csproj", "{13F98A4D-845F-4DC3-B1C1-4C02369DC655}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectCheckApp", "Demo\ConnectCheckApp\ConnectCheckApp.csproj", "{023F2D09-A0E3-49F0-8CFB-FC88BBACAFC1}"
 EndProject

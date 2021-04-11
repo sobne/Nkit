@@ -1,4 +1,4 @@
-﻿namespace Lottery
+﻿namespace LotteryChooser
 {
     partial class MainForm
     {
@@ -119,7 +119,7 @@
             "8个",
             "9个",
             "10个"});
-            this.comboBox1.Location = new System.Drawing.Point(127, 597);
+            this.comboBox1.Location = new System.Drawing.Point(127, 633);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(82, 32);
             this.comboBox1.TabIndex = 7;
@@ -127,7 +127,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("宋体", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(29, 596);
+            this.button1.Location = new System.Drawing.Point(29, 632);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(82, 35);
             this.button1.TabIndex = 6;
@@ -137,9 +137,9 @@
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(29, 256);
+            this.panel1.Location = new System.Drawing.Point(29, 168);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(214, 334);
+            this.panel1.Size = new System.Drawing.Size(260, 460);
             this.panel1.TabIndex = 4;
             // 
             // button
@@ -147,7 +147,7 @@
             this.button.BackColor = System.Drawing.Color.LightGray;
             this.button.Enabled = false;
             this.button.Font = new System.Drawing.Font("微软雅黑", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button.Location = new System.Drawing.Point(46, 173);
+            this.button.Location = new System.Drawing.Point(46, 73);
             this.button.Name = "button";
             this.button.Size = new System.Drawing.Size(180, 59);
             this.button.TabIndex = 3;
@@ -164,7 +164,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.BackgroundImage = global::Lottery.Properties.Resources.bj;
+            this.BackgroundImage = global::LotteryChooser.Properties.Resources.bj;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1174, 749);
             this.Controls.Add(this.splitContainer2);

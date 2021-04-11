@@ -1,4 +1,4 @@
-﻿namespace FormatType
+﻿namespace FormatStyler
 {
     partial class json
     {

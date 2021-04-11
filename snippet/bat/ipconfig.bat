@@ -15,3 +15,8 @@ ipconfig /all
 
 @pause
 ::@echo off pause>nul exit 
+
+::route print
+::route delete 0.0.0.0 mask 0.0.0.0 10.86.255.254
+::route delete 10.0.0.0 mask 255.0.0.0
+::route add -p 10.0.0.0 mask 255.0.0.0 10.86.255.254

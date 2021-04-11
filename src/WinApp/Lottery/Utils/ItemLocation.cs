@@ -1,8 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 
-namespace Lottery.Utils
+namespace LotteryChooser.Utils
 {
+    /// <summary>
+    /// 不要
+    /// </summary>
     public class ItemLocation
     {
         private int _MaxColumns;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lottery.Entity
+namespace LotteryChooser.Entity
 {
     [Serializable]
     /// <summary>
@@ -8,15 +8,15 @@ namespace Lottery.Entity
     /// </summary>
     public class Winner
     {
-        public Lucker Lucker { get; set; }
+        public Chooser Chooser { get; set; }
         public Gift Gift { get; set; }
         public Winner()
         {
 
         }
-        public Winner(Lucker lucker,Gift gift)
+        public Winner(Chooser chooser,Gift gift)
         {
-            this.Lucker = lucker;
+            this.Chooser = chooser;
             this.Gift = gift;
         }
     }

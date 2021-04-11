@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.IO.Ports;
-using Nkit.Core.Utils;
 using Nkit.IO;
 using Nkit.Core;
 
@@ -53,7 +46,7 @@ namespace SerialDebug
             cbBaudRate.SelectedIndex = 0;
             cbDataBits.SelectedIndex = 3;
             cbParity.SelectedIndex = 0;
-            cbPortName.SelectedIndex = 0;
+            if (cbPortName.Items.Count > 0) cbPortName.SelectedIndex = 0;
             cbStopBits.SelectedIndex = 1;
         }
         private void button1_Click(object sender, EventArgs e)

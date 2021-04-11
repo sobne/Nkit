@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Runtime.Remoting.Messaging;
-using Lottery.Entity;
-using Lottery.Services;
+using LotteryChooser.Entity;
+using LotteryChooser.Services;
 
-namespace Lottery.DoGift
+namespace LotteryChooser.DoGift
 {
     public partial class GiftForm : Form
     {
@@ -121,7 +121,7 @@ namespace Lottery.DoGift
                 Random ro = new Random(System.DateTime.Now.Millisecond);
                 int index = ro.Next(0, giftspool.Count);
                 GetIndex = index;
-                giftBox.SetInfo(giftspool[index].Name, giftspool[index].Photo);
+                giftBox.SetInfo(giftspool[index].Name, giftspool[index].Img);
             }
             else
             {

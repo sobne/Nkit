@@ -1,4 +1,4 @@
-﻿namespace Lottery
+﻿namespace LotteryChooser
 {
     partial class WinListForm
     {
@@ -85,7 +85,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Lottery.Properties.Resources.bj_win;
+            this.BackgroundImage = global::LotteryChooser.Properties.Resources.bj_win;
             this.ClientSize = new System.Drawing.Size(567, 639);
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;

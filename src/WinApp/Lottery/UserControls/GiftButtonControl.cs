@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Lottery.Entity;
+using LotteryChooser.Entity;
 
-namespace Lottery.UserControls
+namespace LotteryChooser.UserControls
 {
     public partial class GiftButtonControl : UserControl
     {

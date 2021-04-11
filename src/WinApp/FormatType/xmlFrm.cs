@@ -1,23 +1,17 @@
 ﻿using Newtonsoft.Json;
 using Nkit.Core.Utils;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 
-namespace FormatType
+namespace FormatStyler
 {
     public partial class xmlFrm : Form
     {
         public xmlFrm()
         {
             InitializeComponent();
+            textBox1.Text = "<?xml version=\"1.0\" encoding=\"UTF - 8\"?><root><child name=\"Xtools\">Xtools</child></root>";
         }
         private void toolStripCompose_Click(object sender, EventArgs e)
         {

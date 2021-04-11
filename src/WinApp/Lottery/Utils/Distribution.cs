@@ -2,8 +2,25 @@
 using System.Collections.Generic;
 using System.Drawing;
 
-namespace Lottery.Utils
+namespace LotteryChooser.Utils
 {
+    public class MarginSize
+    {
+        public MarginSize()
+        {
+        }
+        public MarginSize(int top,int right,int bottom,int left)
+        {
+            Top = top;
+            Right = right;
+            Bottom = bottom;
+            Left = left;
+        }
+        public int Top { get; set; }
+        public int Right { get; set; }
+        public int Bottom { get; set; }
+        public int Left { get; set; }
+    }
     public class Distribution
     {
         public List<Point> Points { get; private set; }
@@ -15,15 +32,19 @@ namespace Lottery.Utils
         private int ItemCount;
         private Size ScaleSize;
         private Size DrawSize;
+        private MarginSize MarginSize;//画布间距
         private Distribution()
         {
             ColSpace = 10;
             RowSpace = 10;
         }
-        public Distribution(Size drawSize,Size scaleSize):this()
+        public Distribution(Size drawSize,Size scaleSize, MarginSize marginSize) :this()
         {
+            drawSize.Width = drawSize.Width - (marginSize.Left + marginSize.Right);
+            drawSize.Height = drawSize.Height - (marginSize.Top + marginSize.Bottom);
             DrawSize = drawSize;
             ScaleSize = scaleSize;
+            MarginSize = marginSize;
         }
         public void Distribute(int itemCount)
         {
@@ -100,8 +121,8 @@ namespace Lottery.Utils
 
                 locations.Add(new Point
                 {
-                    X = x,
-                    Y = y
+                    X = x + MarginSize.Left,
+                    Y = y + MarginSize.Top
                 });
 
                 if ((i + 1) % ColsCount == 0)

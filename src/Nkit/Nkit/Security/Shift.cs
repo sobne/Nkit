@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nkit.Security
+﻿namespace Nkit.Security
 {
     /// <summary>
     /// 移位加/解密
@@ -14,7 +9,7 @@ namespace Nkit.Security
         /// 字符串加密  进行位移操作
         /// </summary>
         /// <param name="str">待加密数据</param>
-        /// <returns>加密后的数据</returns>
+        /// <returns>加密后的数据</returns>C:\p\code\Nkit\src\Nkit\Nkit\Security\Shift.cs
         public string Encrypt(string str)
         {
             string _temp = "";

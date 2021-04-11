@@ -1,4 +1,4 @@
-﻿namespace Lottery.UserControls
+﻿namespace LotteryChooser.UserControls
 {
     partial class GiftPaintControl
     {

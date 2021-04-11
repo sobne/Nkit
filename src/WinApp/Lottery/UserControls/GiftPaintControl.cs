@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using Lottery.Entity;
+using LotteryChooser.Entity;
 
-namespace Lottery.UserControls
+namespace LotteryChooser.UserControls
 {
     public partial class GiftPaintControl : PaintControl
     {
@@ -67,7 +67,7 @@ namespace Lottery.UserControls
                 //    g.DrawRectangle(p, rect);
                 //}
                 /*绘制图像*/
-                Image srcImg = items[i].Photo;
+                Image srcImg = items[i].Img;
 
                 Rectangle dstRect = new Rectangle(x, y, _ItemSize.Width, _ItemSize.Height - TextHeight);
                 //   System.Drawing.Imaging.ImageAttributes attri = new System.Drawing.Imaging.ImageAttributes();  是否膳所这列，给一个矩阵即可

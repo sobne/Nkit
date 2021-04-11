@@ -1,4 +1,4 @@
-﻿namespace Lottery.DoGift
+﻿namespace LotteryChooser.DoGift
 {
     partial class GiftExControl
     {
@@ -47,7 +47,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.pictureBox1.Image = global::Lottery.Properties.Resources.gift;
+            this.pictureBox1.Image = global::LotteryChooser.Properties.Resources.gift;
             this.pictureBox1.Location = new System.Drawing.Point(48, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(500, 300);

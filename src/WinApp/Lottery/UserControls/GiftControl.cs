@@ -1,10 +1,10 @@
-﻿using Lottery.Entity;
+﻿using LotteryChooser.Entity;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Lottery
+namespace LotteryChooser
 {
     public partial class GiftControl : UserControl
     {
@@ -45,7 +45,7 @@ namespace Lottery
                 this.splitContainer1.Panel2.Controls.Add(Buttons[i]);
                 i++;
             }
-            this.splitContainer1.SplitterDistance = this.splitContainer1.Height - 35 * i + 10;
+            this.splitContainer1.SplitterDistance = this.splitContainer1.Height - 35 * i - 6;
         }
 
         void btn_Click(object sender, EventArgs e)
@@ -76,7 +76,8 @@ namespace Lottery
             if (gift == null) return;
             if (!InvokeRequired)
             {
-                pictureBox1.Image = gift.Photo;
+                pictureBox1.Image = gift.Img;
+                //pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             }
             else
             {

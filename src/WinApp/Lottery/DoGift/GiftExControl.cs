@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Text;
 using System.Windows.Forms;
 
-namespace Lottery.DoGift
+namespace LotteryChooser.DoGift
 {
     public partial class GiftExControl : UserControl
     {
         public event EventHandler BtnClick;
-        private delegate void handler(string fullname, Image photo);
-        private GiftForm ParnetForm;
+        private delegate void handler(string fullname, Image img);
+        private GiftForm parentFrm;
 
         /// <summary>
         /// 按钮事件
@@ -42,8 +38,8 @@ namespace Lottery.DoGift
         public GiftExControl(GiftForm parentForm)
         {
             InitializeComponent();
-            ParnetForm = parentForm;
-            ParnetForm.DoIt += new EventHandler(ParnetForm_DoIt);
+            parentFrm = parentForm;
+            parentFrm.DoIt += new EventHandler(ParnetForm_DoIt);
         }
         public void SetButtonEnabled(bool enabled)
         {

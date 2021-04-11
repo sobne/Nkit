@@ -1,0 +1,6 @@
+﻿[
+  {"id": 0,"name": "一等奖","number": 1,"numberpertime": 1,"pic": "\\Gift\\1.jpg","description": "","title": "一等奖","level": 1},
+  {"id": 1,"name": "二等奖","number": 2,"numberpertime": 2,"pic": "\\Gift\\2.jpg","description": "","title": "二等奖","level": 1},
+  {"id": 2,"name": "三等奖","number": 3,"numberpertime": 3,"pic": "\\Gift\\3.jpg","description": "","title": "三等奖","level": 1},
+  {"id": 3,"name": "幸运奖","number": 16,"numberpertime": 8,"pic": "\\Gift\\4.jpg","description": "","title": "幸运奖","level": 1}
+]
